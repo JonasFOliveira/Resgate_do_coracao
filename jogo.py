@@ -47,13 +47,13 @@ screen.blit(imagem, (0, 0))  # Colocando a imagem como o fundo
 
 #realizando movimentação
 x = 0
-y = 32
+y = 0
 mudanca = 0
 
 al_ret = 100
 la_ret = 200
 
-
+vida = 3
 
 
 
@@ -72,11 +72,11 @@ while jogo:
     screen.blit(imagem, (0, 0))  # Colocando a imagem como o fundo
     for evento in pygame.event.get():
 
-        if evento.type == QUIT:
+        if evento.type == QUIT or vida == 0:
             pygame.quit()
             exit()
 
-    #movimentar o personagem (retangulo) com de forma constante
+    #movimentar o personagem (retangulo) de forma constante
     if pygame.key.get_pressed()[K_a]:
         la_ret -= 5
     if pygame.key.get_pressed()[K_s]:
@@ -85,7 +85,15 @@ while jogo:
         la_ret += 5
     if pygame.key.get_pressed()[K_w]:
         al_ret -= 5
-    pygame.draw.rect(screen, (255, 167, 25), (la_ret, al_ret, 40, 50))  # criando um retangulo
+    rec_1 = pygame.draw.rect(screen, (255, 167, 25), (la_ret, al_ret, 40, 50))  # criando um retangulo
+    Morcego = pygame.draw.rect(screen, (0,0,0), (255, y, 64, 64)) #criando um retangulo para cer o morcego
+
+    if rec_1.colliderect(Morcego):
+        al_ret = 100
+        la_ret = 200
+        vida -= 1
+
+
 
     # transformando as imagens em um Gif
     if FrameAtualMorcegoFrente >= qntFramesMorcego:
@@ -102,16 +110,16 @@ while jogo:
 
 
     if mudanca == 0:
-        morcego_frente.blit(screen, int(FrameAtualMorcegoFrente), (255, y),Origin.Center)  # inserindo o gif de morcego na tela
-        y += 1
+        morcego_frente.blit(screen, int(FrameAtualMorcegoFrente), (255, y),Origin.TopLeft)  # inserindo o gif de morcego na tela
+        y += 5
 
     elif mudanca == 1: #se ocorrer a mudança, ou sjea, chegar no final, o morcego vai voltar de costas
-        morcego_tras.blit(screen, int(FrameAtualMorcegoTras), (255, y),Origin.Center)  # inserindo o gif de morcego tras na tela
-        y -= 1
+        morcego_tras.blit(screen, int(FrameAtualMorcegoTras), (255, y),Origin.TopLeft)  # inserindo o gif de morcego tras na tela
+        y -= 5
 
-    if y >= Altura-32:
+    if y >= Altura-64:
         mudanca = 1
-    elif y == 32:
+    elif y == 0:
         mudanca = 0
 
 
