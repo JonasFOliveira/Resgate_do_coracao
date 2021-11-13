@@ -55,7 +55,6 @@ while jogo:
         if evento.type == QUIT or vida == 0:
             pygame.quit()
             exit()
-
     Mapa1 = []
     Morcego = pygame.draw.rect(screen, (0, 0, 0), (255, y, 64, 64))  # criando um retangulo para cer o morcego
     screen.blit(imagem, (0, 0))  # Colocando a imagem como o fundo
@@ -65,8 +64,9 @@ while jogo:
         b = mapas.mapa_1[i][1]
         c = mapas.mapa_1[i][2]
         d = mapas.mapa_1[i][3]
-        Mapa1.append(pygame.draw.rect(screen, (0, 0, 0), (a, b, c, d)))
-    rec_1 = pygame.draw.rect(screen, (255, 167, 25), (la_ret, al_ret, 64, 64))  # criando um retangulo
+        Mapa1.append(pygame.draw.rect(screen, (0, 0, 0), (a, b, c, d))),
+   
+    rec_1 = pygame.draw.rect(screen, (255, 167, 25), (la_ret, al_ret, 60, 60))  # criando um retangulo
 
 
     # movimentar o personagem (retangulo) de forma constante
