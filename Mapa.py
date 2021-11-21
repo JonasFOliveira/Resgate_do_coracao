@@ -11,6 +11,7 @@ Portas = []
 Chaves = []
 TodasAsCoisas = [Paredes, Portas, Chaves]
 
+# Posição inicial
 for Y in range(len(Matriz_mapa)):
     for X in range(len(Matriz_mapa[Y])):
         if Matriz_mapa[Y][X] == 9:
