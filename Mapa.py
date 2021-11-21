@@ -11,15 +11,20 @@ Portas = []
 Chaves = []
 TodasAsCoisas = [Paredes, Portas, Chaves]
 
+for Y in range(len(Matriz_mapa)):
+    for X in range(len(Matriz_mapa[Y])):
+        if Matriz_mapa[Y][X] == 9:
+            inix = X * bloco_largura - 585
+            iniy = Y * bloco_altura -285
 # Constroi mapa
 for Y in range(len(Matriz_mapa)):
     for X in range(len(Matriz_mapa[Y])):
         if Matriz_mapa[Y][X] == 1:
-           Paredes.append(pygame.Rect(X * bloco_largura, Y * bloco_altura, bloco_largura, bloco_altura))
+           Paredes.append(pygame.Rect(X * bloco_largura -inix, Y * bloco_altura -iniy, bloco_largura, bloco_altura))
         elif Matriz_mapa[Y][X] == 2:
-            Portas.append(pygame.Rect(X * bloco_largura, Y * bloco_altura, bloco_largura, bloco_altura))
+            Portas.append(pygame.Rect(X * bloco_largura +585, Y * bloco_altura -405, bloco_largura, bloco_altura))
         elif Matriz_mapa[Y][X] == 3:
-            Chaves.append(pygame.Rect((X * bloco_largura) + 10, (Y * bloco_altura + 10), 40, 20))
+            Chaves.append(pygame.Rect((X * bloco_largura) + 10 +585, (Y * bloco_altura + 10) -405, 40, 20))
 
 # Move tudo do mapa e gerencia as colissões do mapa
 def Move_mapa(RetDoJogador, direcao = "nada"):
