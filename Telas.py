@@ -9,6 +9,7 @@ def FaseJogo(screen, retjogador):
     Q =False
     if fase[0] == 1:
         Mapa.Deletar_mapa()
+        Mapa.Vidas = ["vida", "vida", "vida"]
         Q = main_menu(screen)
     elif fase[0] == 3:
         Q = options(screen)
@@ -18,7 +19,6 @@ def FaseJogo(screen, retjogador):
         fase[0] = -4
     if Mapa.Vidas == []:
         fase[0] = 1
-        Mapa.Vidas = ["vida", "vida", "vida"]
     for i in range(len(Mapa.Fim)):
         if retjogador.left > Mapa.Fim[i].left and retjogador.right < Mapa.Fim[i].right and retjogador.top > Mapa.Fim[i].top -10 and retjogador.bottom < Mapa.Fim[i].bottom +10:
             if fase[0] == -4:

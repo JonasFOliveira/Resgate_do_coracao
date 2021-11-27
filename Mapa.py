@@ -6,7 +6,7 @@ bloco_largura = 64
 bloco_altura = 64
 velocidade = 6
 VelocidadeInimigo = 5
-Vidas = ["vida", "vida", "vida"]
+Vidas = []
 Chave_pega = []
 Paredes = []
 Portas = []
@@ -144,7 +144,6 @@ def InimigoH(retjogador):
             Deletar_mapa()
             Monta_mapa()
             del Vidas[-1]
-            break
 
 # Move o inimigo vertical
 def InimigoV(retjogador):
@@ -158,7 +157,6 @@ def InimigoV(retjogador):
             Deletar_mapa()
             Monta_mapa()
             del Vidas[-1]
-            break
 
 # Espinhos
 def Espinho(retjogador):

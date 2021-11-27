@@ -35,10 +35,6 @@ while not Quit:
     Mapa.InimigoV(retJ)
     Mapa.Espinho(retJ)
 
-    if Mapa.Vidas == []:
-        Telas.fase[0] = 1
-        Mapa.Vidas = ["vida", "vida", "vida"]
-
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
