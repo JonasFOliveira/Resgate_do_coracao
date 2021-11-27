@@ -15,6 +15,7 @@ font = pygame.font.SysFont('Arial', 25, True, False)
 
 
 fundo = pygame.image.load("fundo.png").convert()
+musica = pygame.mixer.Sound("PassandoAPagina.wav")
 
 def escrever_texto(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
@@ -138,6 +139,8 @@ def cutscene1():
         screen.fill(constantes.Preto)
         cutscene.blit(screen, FrameAtualcutscene, (64*2, 64), Origin.TopLeft)
         plaquinhas.blit(screen, FrameAtualcutscene,(64*5, 64*7), Origin.TopLeft)
+        escrever_texto('Pressione "Espaço" para continuar...', font, constantes.Branco, screen, 750, 670)
+
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -146,9 +149,11 @@ def cutscene1():
             if event.type == KEYDOWN:
                 if event.key == K_SPACE:
                     FrameAtualcutscene += 1
+                    musica.play()
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     running = False
         pygame.display.update()
         fpsClock.tick(60)
+
 main_menu()
