@@ -3,9 +3,12 @@ import Mapa
 import Telas
 
 pygame.init()
-
-tela = pygame.display.set_mode([1200, 600])
-retJ = pygame.Rect(585, 285, 30, 30)
+TLargura = 1216
+TAltura = 704
+JLargura = 30
+JAltura = 30
+tela = pygame.display.set_mode([TLargura, TAltura])
+retJ = pygame.Rect((TLargura/2) - (JLargura/2), (TAltura/2) - (JAltura/2), JLargura, JAltura)
 
 Quit = False
 while not Quit:
@@ -28,7 +31,8 @@ while not Quit:
         Mapa.Move_mapa(retJ, direcao="direita")
 
     Mapa.Bau(retJ)
-    Mapa.Inimigo(retJ)
+    Mapa.InimigoH(retJ)
+    Mapa.InimigoV(retJ)
     Mapa.Espinho(retJ)
 
     if Mapa.Vidas == []:

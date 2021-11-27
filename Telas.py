@@ -17,7 +17,7 @@ def FaseJogo(screen, retjogador):
         Mapa.Monta_mapa()
         fase[0] = -4
     for i in range(len(Mapa.Fim)):
-        if retjogador.left > Mapa.Fim[i].left -10 and retjogador.right < Mapa.Fim[i].right +10 and retjogador.top > Mapa.Fim[i].top -10 and retjogador.bottom < Mapa.Fim[i].bottom +10:
+        if retjogador.left > Mapa.Fim[i].left and retjogador.right < Mapa.Fim[i].right and retjogador.top > Mapa.Fim[i].top -10 and retjogador.bottom < Mapa.Fim[i].bottom +10:
             if fase[0] == -4:
                 fase[0] = 1
     return Q
