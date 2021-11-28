@@ -1,5 +1,4 @@
 import pygame
-from Mapa_matriz import Matriz_mapa
 
 # Variaveis
 bloco_largura = 64
@@ -7,6 +6,7 @@ bloco_altura = 64
 velocidade = 6
 VelocidadeInimigo = 5
 Vidas = []
+coracao = []
 Chave_pega = []
 Paredes = []
 Portas = []
@@ -20,39 +20,42 @@ Inimigos_direcaoH = []
 InimigosV = []
 Inimigos_direcaoV = []
 Fim = []
-TodasAsCoisas = [Paredes, Portas, Baus, Chaves, Espinhos, InimigosH, InimigosV, Fim]
+TodasAsCoisas = [Paredes, Portas, Baus, Chaves, Espinhos, InimigosH, InimigosV, coracao, Fim]
 
-def Monta_mapa():
+def Monta_mapa(matriz):
     # Posição inicial
     inix = 0
     iniy = 0
-    for Y in range(len(Matriz_mapa)):
-        for X in range(len(Matriz_mapa[Y])):
-            if Matriz_mapa[Y][X] == 9:
+    for Y in range(len(matriz)):
+        for X in range(len(matriz[Y])):
+            if matriz[Y][X] == 9:
                 inix = X * bloco_largura - 593
                 iniy = Y * bloco_altura -322
 
     # Constroi mapa
-    for Y in range(len(Matriz_mapa)):
-        for X in range(len(Matriz_mapa[Y])):
-            if Matriz_mapa[Y][X] == 1:
+    for Y in range(len(matriz)):
+        for X in range(len(matriz[Y])):
+            if matriz[Y][X] == 1:
                Paredes.append(pygame.Rect(X * bloco_largura -inix, Y * bloco_altura -iniy, bloco_largura, bloco_altura))
-            elif Matriz_mapa[Y][X] == 2:
+            elif matriz[Y][X] == 2:
                 Portas.append(pygame.Rect(X * bloco_largura -inix, Y * bloco_altura -iniy, bloco_largura, bloco_altura))
-            elif Matriz_mapa[Y][X] == 3:
+            elif matriz[Y][X] == 3:
                 Baus.append(pygame.Rect(X * bloco_largura -inix, Y * bloco_altura -iniy, bloco_largura, bloco_altura))
                 Chaves.append(pygame.Rect(X * bloco_largura -inix + 10, Y * bloco_altura -iniy + 20, 40, 20))
-            elif Matriz_mapa[Y][X] == 4:
+            elif matriz[Y][X] == 4:
                 Espinhos.append(pygame.Rect(X * bloco_largura -inix, Y * bloco_altura -iniy, bloco_largura, bloco_altura))
                 Espinhos_estado.append("ativo")
                 Espinhos_tempo.append(0)
-            elif Matriz_mapa[Y][X] == 5:
+            elif matriz[Y][X] == 5:
                 InimigosH.append(pygame.Rect(X * bloco_largura - inix, Y * bloco_altura - iniy, bloco_largura, bloco_altura))
                 Inimigos_direcaoH.append(VelocidadeInimigo)
-            elif Matriz_mapa[Y][X] == 6:
+            elif matriz[Y][X] == 6:
                 InimigosV.append(pygame.Rect(X * bloco_largura -inix, Y * bloco_altura -iniy, bloco_largura, bloco_altura))
                 Inimigos_direcaoV.append(VelocidadeInimigo)
-            elif Matriz_mapa[Y][X] == 8:
+            elif matriz[Y][X] == 7:
+                if len(Vidas) != 3:
+                    coracao.append(pygame.Rect(X * bloco_largura -inix +15, Y * bloco_altura -iniy +15, 30, 30))
+            elif matriz[Y][X] == 8:
                 Fim.append(pygame.Rect(X * bloco_largura -inix, Y * bloco_altura -iniy, bloco_largura, bloco_altura))
 
 
@@ -71,7 +74,7 @@ def Move_mapa(RetDoJogador, direcao = "nada"):
             if tc.colliderect(RetDoJogador):
                 PortaChave(RetDoJogador, direcao)
                 PegaChave(RetDoJogador, direcao)
-                if tc not in Espinhos and tc not in InimigosH and tc not in InimigosV and tc not in Fim:
+                if tc not in Espinhos and tc not in InimigosH and tc not in InimigosV and tc not in coracao and tc not in Fim:
                     Para_mapa(direcao)
 
 # Faz o mapa parar
@@ -132,8 +135,17 @@ def Bau(retjogador):
             del Baus[i]
             break
 
+# Vida
+def Vida(retjogador):
+    for i in range(len(coracao)):
+        if coracao[i].colliderect(retjogador):
+            Vidas.append("vida")
+            del coracao[i]
+            break
+
+
 # Move o inimigo horizontal
-def InimigoH(retjogador):
+def InimigoH(retjogador, map):
     for i in range(len(InimigosH)):
         InimigosH[i].left += Inimigos_direcaoH[i]
         for p in Paredes:
@@ -142,11 +154,11 @@ def InimigoH(retjogador):
                 Inimigos_direcaoH[i] = -Inimigos_direcaoH[i]
         if InimigosH[i].colliderect(retjogador):
             Deletar_mapa()
-            Monta_mapa()
             del Vidas[-1]
+            Monta_mapa(map)
 
 # Move o inimigo vertical
-def InimigoV(retjogador):
+def InimigoV(retjogador, map):
     for i in range(len(InimigosV)):
         InimigosV[i].top += Inimigos_direcaoV[i]
         for p in Paredes:
@@ -155,11 +167,11 @@ def InimigoV(retjogador):
                 Inimigos_direcaoV[i] = -Inimigos_direcaoV[i]
         if InimigosV[i].colliderect(retjogador):
             Deletar_mapa()
-            Monta_mapa()
             del Vidas[-1]
+            Monta_mapa(map)
 
 # Espinhos
-def Espinho(retjogador):
+def Espinho(retjogador, map):
     for i in range(len(Espinhos)):
         if Espinhos_estado[i] == "ativo":
             Espinhos_tempo[i] += 1
@@ -174,8 +186,8 @@ def Espinho(retjogador):
         if Espinhos[i].colliderect(retjogador):
             if Espinhos_estado[i] == "ativo":
                 Deletar_mapa()
-                Monta_mapa()
                 del Vidas[-1]
+                Monta_mapa(map)
 
 # Deleta mapa
 def Deletar_mapa():
@@ -191,6 +203,7 @@ def Deletar_mapa():
     del Inimigos_direcaoH[:]
     del InimigosV[:]
     del Inimigos_direcaoV[:]
+    del coracao[:]
     del Fim[:]
 
 # Desenha tudo do mapa
@@ -207,6 +220,8 @@ def Desenha_coisas(screen):
         pygame.draw.rect(screen, (255, 0, 0), inimh)
     for inimv in InimigosV:
         pygame.draw.rect(screen, (255, 0, 0), inimv)
+    for c in coracao:
+        pygame.draw.rect(screen, (155, 0, 0), c)
     for i in range(len(Espinhos)):
         if Espinhos_estado[i] == "ativo":
             pygame.draw.rect(screen, (255, 0, 0), Espinhos[i])

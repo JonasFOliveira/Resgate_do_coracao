@@ -1,13 +1,17 @@
 import pygame
 import Mapa
+import Mapa_matriz
 import Telas
 
 pygame.init()
 TLargura = 1216
 TAltura = 704
-JLargura = 30
-JAltura = 30
+JLargura = 32
+JAltura = 32
+# janela
 tela = pygame.display.set_mode([TLargura, TAltura])
+
+# retangulo do jogador
 retJ = pygame.Rect((TLargura/2) - (JLargura/2), (TAltura/2) - (JAltura/2), JLargura, JAltura)
 
 Quit = False
@@ -30,10 +34,15 @@ while not Quit:
     if chave[pygame.K_d]:
         Mapa.Move_mapa(retJ, direcao="direita")
 
+    if Telas.fase[0] == -4:
+        mapa = Mapa_matriz.Matriz_mapa1
+    else:
+        mapa = None
     Mapa.Bau(retJ)
-    Mapa.InimigoH(retJ)
-    Mapa.InimigoV(retJ)
-    Mapa.Espinho(retJ)
+    Mapa.Vida(retJ)
+    Mapa.InimigoH(retJ, mapa)
+    Mapa.InimigoV(retJ, mapa)
+    Mapa.Espinho(retJ, mapa)
 
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:

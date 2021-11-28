@@ -1,6 +1,7 @@
 import pygame
 import spritesheet
 import Mapa
+import Mapa_matriz
 
 pygame.init()
 fase = [1]
@@ -15,7 +16,7 @@ def FaseJogo(screen, retjogador):
         Q = options(screen)
     elif fase[0] == 4:
         Mapa.Deletar_mapa()
-        Mapa.Monta_mapa()
+        Mapa.Monta_mapa(Mapa_matriz.Matriz_mapa1)
         fase[0] = -4
     if Mapa.Vidas == []:
         fase[0] = 1
