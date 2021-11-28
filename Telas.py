@@ -5,6 +5,7 @@ import Mapa_matriz
 
 pygame.init()
 fase = [1]
+Som_pagina = pygame.mixer.Sound("Recursos/Recursos_PassandoAPagina.wav")
 font = pygame.font.SysFont('Arial', 25, True, False)
 def FaseJogo(screen, retjogador):
     Q =False
@@ -69,26 +70,27 @@ def cutscene1(t):
         if FrameAtualcutscene > 5:
             running = False
 
-
-
-        t.fill((0, 0, 0))
-        cutscene.blit(t, FrameAtualcutscene, (64*2, 64), spritesheet.Origin.TopLeft)
-        plaquinhas.blit(t, FrameAtualcutscene,(64*5, 64*7), spritesheet.Origin.TopLeft)
-        escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
-
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     FrameAtualcutscene += 1
+                    Som_pagina.play()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
                     menu = True
                     fase[0] = 1
+
+        t.fill((0, 0, 0))
+        cutscene.blit(t, FrameAtualcutscene, (64 * 2, 64), spritesheet.Origin.TopLeft)
+        plaquinhas.blit(t, FrameAtualcutscene, (64 * 5, 64 * 7), spritesheet.Origin.TopLeft)
+        escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
+
         pygame.display.update()
+        pygame.time.Clock().tick(60)
+
     if not menu:
         fase[0] = 4
 
