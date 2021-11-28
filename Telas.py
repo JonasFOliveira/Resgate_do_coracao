@@ -12,6 +12,8 @@ def FaseJogo(screen, retjogador):
         Mapa.Deletar_mapa()
         Mapa.Vidas = ["vida", "vida", "vida"]
         Q = main_menu(screen)
+    elif fase[0] == 2:
+        Q = cutscene1(screen)
     elif fase[0] == 3:
         Q = options(screen)
     elif fase[0] == 4:
@@ -46,7 +48,7 @@ def main_menu(t):
 
     if button_1.collidepoint((mx, my)):
         if click:
-            fase[0] = 4
+            fase[0] = 2
     if button_2.collidepoint((mx, my)):
         if click:
             fase[0] = 3
@@ -54,6 +56,41 @@ def main_menu(t):
     escrever_texto('Botão 1', font, (255, 255, 255), t, 50, 100)
     pygame.draw.rect(t, (255, 0, 0), button_2)
     escrever_texto('Botão 2', font, (255, 255, 255), t, 50, 200)
+
+# cutscene1 -> 2
+def cutscene1(t):
+    running = True
+    menu = False
+    cutscene = spritesheet.SpriteSheet("Recursos/Cutscene1.png", 7, 1)
+    plaquinhas = spritesheet.SpriteSheet("Recursos/Placa_Cutscene1.png", 7, 1)
+    FrameAtualcutscene = 0
+
+    while running:
+        if FrameAtualcutscene > 5:
+            running = False
+
+
+
+        t.fill((0, 0, 0))
+        cutscene.blit(t, FrameAtualcutscene, (64*2, 64), spritesheet.Origin.TopLeft)
+        plaquinhas.blit(t, FrameAtualcutscene,(64*5, 64*7), spritesheet.Origin.TopLeft)
+        escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
+
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    FrameAtualcutscene += 1
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    running = False
+                    menu = True
+                    fase[0] = 1
+        pygame.display.update()
+    if not menu:
+        fase[0] = 4
 
 # opções -> 3
 def options(t):
