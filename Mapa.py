@@ -58,7 +58,6 @@ def Monta_mapa(matriz):
             elif matriz[Y][X] == 8:
                 Fim.append(pygame.Rect(X * bloco_largura -inix, Y * bloco_altura -iniy, bloco_largura, bloco_altura))
 
-
 # Move tudo do mapa e gerencia as colissões do mapa
 def Move_mapa(RetDoJogador, direcao = "nada"):
     for i in range(len(TodasAsCoisas)):

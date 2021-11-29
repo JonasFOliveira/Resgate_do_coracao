@@ -10,7 +10,7 @@ font = pygame.font.SysFont('Arial', 25, True, False)
 
 
 def FaseJogo(screen, retjogador):
-    Q =False
+    Q = False
     if fase[0] == 1:
         Mapa.Deletar_mapa()
         Mapa.Vidas = ["vida", "vida", "vida"]
@@ -27,10 +27,12 @@ def FaseJogo(screen, retjogador):
         fase[0] = 1
     # passa para o proximo
     for i in range(len(Mapa.Fim)):
-        if retjogador.left > Mapa.Fim[i].left and retjogador.right < Mapa.Fim[i].right and retjogador.top > Mapa.Fim[i].top -10 and retjogador.bottom < Mapa.Fim[i].bottom +10:
+        if retjogador.left > Mapa.Fim[i].left and retjogador.right < Mapa.Fim[i].right and \
+                retjogador.top > Mapa.Fim[i].top - 10 and retjogador.bottom < Mapa.Fim[i].bottom + 10:
             if fase[0] == -4:
                 fase[0] = 1
     return Q
+
 
 # Menu -> 1
 def main_menu(t):
@@ -42,7 +44,6 @@ def main_menu(t):
             if event.button == 1:
                 click = True
 
-    print('comecei')
     menu = SpriteSheet('Recursos/menu-livro.png', 4, 1)
     menu.blit(t, 0, (0, 0), Origin.TopLeft)
 
@@ -66,15 +67,13 @@ def main_menu(t):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 click = True
-                
+
     if button_1.collidepoint((mx, my)):
         if click:
             fase[0] = 2
     if button_2.collidepoint((mx, my)):
         if click:
             fase[0] = 3
-
-
 
 
 # cutscene1 -> 2
@@ -109,7 +108,6 @@ def cutscene1(t):
 
         pygame.display.update()
         pygame.time.Clock().tick(60)
-
     if not menu:
         fase[0] = 4
 
@@ -136,7 +134,6 @@ def options(t):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 click = True
-
 
 def escrever_texto(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
