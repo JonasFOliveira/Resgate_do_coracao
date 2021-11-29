@@ -1,12 +1,14 @@
 import pygame
-import spritesheet
+from spritesheet import SpriteSheet, Origin
 import Mapa
 import Mapa_matriz
 
 pygame.init()
 fase = [1]
-Som_pagina = pygame.mixer.Sound("Recursos/Recursos_PassandoAPagina.wav")
+Som_pagina = pygame.mixer.Sound("Recursos/PassandoAPagina.wav")
 font = pygame.font.SysFont('Arial', 25, True, False)
+
+
 def FaseJogo(screen, retjogador):
     Q =False
     if fase[0] == 1:
@@ -40,31 +42,47 @@ def main_menu(t):
             if event.button == 1:
                 click = True
 
-    t.fill((0, 0, 0))
-    escrever_texto('Menu Principal', font, (255, 255, 255), t, 20, 20)
+    print('comecei')
+    menu = SpriteSheet('Recursos/menu-livro.png', 4, 1)
+    menu.blit(t, 0, (0, 0), Origin.TopLeft)
 
     mx, my = pygame.mouse.get_pos()
 
-    button_1 = pygame.Rect(50, 100, 200, 50)
-    button_2 = pygame.Rect(50, 200, 200, 50)
+    button_1 = pygame.Rect(700, 215, 200, 50)
+    button_2 = pygame.Rect(700, 290, 200, 50)
+    button_3 = pygame.Rect(700, 365, 200, 50)
 
+    if button_1.collidepoint((mx, my)):
+        menu.blit(t, 1, (0, 0), Origin.TopLeft)
+    if button_2.collidepoint((mx, my)):
+        menu.blit(t, 2, (0, 0), Origin.TopLeft)
+    if button_3.collidepoint((mx, my)):
+        menu.blit(t, 3, (0, 0), Origin.TopLeft)
+
+    click = False
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            return True
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                click = True
+                
     if button_1.collidepoint((mx, my)):
         if click:
             fase[0] = 2
     if button_2.collidepoint((mx, my)):
         if click:
             fase[0] = 3
-    pygame.draw.rect(t, (255, 0, 0), button_1)
-    escrever_texto('Botão 1', font, (255, 255, 255), t, 50, 100)
-    pygame.draw.rect(t, (255, 0, 0), button_2)
-    escrever_texto('Botão 2', font, (255, 255, 255), t, 50, 200)
+
+
+
 
 # cutscene1 -> 2
 def cutscene1(t):
     running = True
     menu = False
-    cutscene = spritesheet.SpriteSheet("Recursos/Cutscene1.png", 7, 1)
-    plaquinhas = spritesheet.SpriteSheet("Recursos/Placa_Cutscene1.png", 7, 1)
+    cutscene = SpriteSheet("Recursos/Cutscene1.png", 7, 1)
+    plaquinhas = SpriteSheet("Recursos/Placa_Cutscene1.png", 7, 1)
     FrameAtualcutscene = 0
 
     while running:
@@ -85,8 +103,8 @@ def cutscene1(t):
                     fase[0] = 1
 
         t.fill((0, 0, 0))
-        cutscene.blit(t, FrameAtualcutscene, (64 * 2, 64), spritesheet.Origin.TopLeft)
-        plaquinhas.blit(t, FrameAtualcutscene, (64 * 5, 64 * 7), spritesheet.Origin.TopLeft)
+        cutscene.blit(t, FrameAtualcutscene, (64 * 2, 64), Origin.TopLeft)
+        plaquinhas.blit(t, FrameAtualcutscene, (64 * 5, 64 * 7), Origin.TopLeft)
         escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
 
         pygame.display.update()
