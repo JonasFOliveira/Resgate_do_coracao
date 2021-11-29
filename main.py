@@ -2,6 +2,7 @@ import pygame
 import Mapa
 import Mapa_matriz
 import Telas
+import Sprites
 
 pygame.init()
 TLargura = 1216
@@ -18,9 +19,12 @@ Quit = False
 while not Quit:
     pygame.display.update()
     pygame.time.Clock().tick(60)
-    tela. fill((255, 255, 255))
+    tela.fill((255, 255, 255))
     Quit = Telas.FaseJogo(tela, retJ)
     Mapa.Desenha_coisas(tela)
+    Sprites.TemposDosSprites()
+    Sprites.Atualiza_sprites()
+    Sprites.Desenha_sprites(tela)
     if Telas.fase[0] == -4:
         pygame.draw.rect(tela, (0, 0, 255), retJ)
 
