@@ -3,8 +3,8 @@ import pygame
 # Variaveis
 bloco_largura = 120
 bloco_altura = 120
-velocidade = 6
-VelocidadeInimigo = 7
+velocidade = 10
+VelocidadeInimigo = 12
 Vidas = []
 coracao = []
 Chave_pega = []
@@ -40,8 +40,8 @@ def Monta_mapa(matriz):
             elif matriz[Y][X] == 2:
                 Portas.append(pygame.Rect(X * bloco_largura -inix, Y * bloco_altura -iniy, bloco_largura, bloco_altura))
             elif matriz[Y][X] == 3:
-                Baus.append(pygame.Rect(X * bloco_largura -inix + 15, Y * bloco_altura -iniy +15, 90, 90))
-                Chaves.append(pygame.Rect(X * bloco_largura -inix + 35, Y * bloco_altura -iniy + 45, 50, 30))
+                Baus.append(pygame.Rect(X * bloco_largura -inix + 33, Y * bloco_altura -iniy +33, 75, 75))
+                Chaves.append(pygame.Rect(X * bloco_largura -inix + 35, Y * bloco_altura -iniy + 61, 71, 25))
             elif matriz[Y][X] == 4:
                 Espinhos.append(pygame.Rect(X * bloco_largura -inix, Y * bloco_altura -iniy, bloco_largura, bloco_altura))
                 Espinhos_estado.append("ativo")
@@ -54,7 +54,7 @@ def Monta_mapa(matriz):
                 Inimigos_direcaoV.append(VelocidadeInimigo)
             elif matriz[Y][X] == 7:
                 if len(Vidas) != 3:
-                    coracao.append(pygame.Rect(X * bloco_largura -inix +40, Y * bloco_altura -iniy +40, 40, 40))
+                    coracao.append(pygame.Rect(X * bloco_largura -inix +40, Y * bloco_altura -iniy +40, 37, 40))
             elif matriz[Y][X] == 8:
                 Fim.append(pygame.Rect(X * bloco_largura -inix, Y * bloco_altura -iniy, bloco_largura, bloco_altura))
 
