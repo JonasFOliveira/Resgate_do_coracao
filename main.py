@@ -39,7 +39,7 @@ while not Quit:
         Mapa.Move_mapa(retJ, direcao="direita")
 
     if Telas.fase[0] == -4:
-        mapa = Mapa_matriz.Matriz_mapa1
+        mapa = Mapa_matriz.Matriz_mapa_teste
     else:
         mapa = None
     Mapa.Bau(retJ)
@@ -51,6 +51,7 @@ while not Quit:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
+                Telas.Som_pagina.play()
                 Telas.fase[0] = 1
         if event.type == pygame.QUIT:
             Quit = True
