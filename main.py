@@ -17,7 +17,7 @@ retJ = pygame.Rect((TLargura/2) - (JLargura/2), (TAltura/2) - (JAltura/2), JLarg
 Quit = False
 while not Quit:
     pygame.display.update()
-    pygame.time.Clock().tick(60)
+    pygame.time.Clock().tick(120)
     tela.fill((255, 255, 255))
     Quit = Telas.FaseJogo(tela, retJ)
     Mapa.Desenha_coisas(tela)
@@ -38,7 +38,7 @@ while not Quit:
         Mapa.Move_mapa(retJ, direcao="direita")
 
     if Telas.fase[0] == -4:
-        mapa = Mapa_matriz.Matriz_mapa_teste
+        mapa = Mapa_matriz.Matriz_mapa1
     else:
         mapa = None
     Mapa.Bau(retJ)
