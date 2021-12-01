@@ -34,6 +34,15 @@ Co = pygame.sprite.Sprite()
 Co.image = pygame.image.load("Recursos/Coracao_3-1.png").subsurface((0, 0), (59, 64))
 Co.image = pygame.transform.scale(Co.image, (37, 40))
 Co.rect = pygame.Rect(0, 0, 0, 0)
+# Porta
+Por = pygame.sprite.Sprite()
+Por.image = pygame.image.load("Recursos/Porta.png").subsurface((0, 0), (64, 64))
+Por.image = pygame.transform.scale(Por.image, (120, 120))
+Por.rect = pygame.Rect(0, 0, 0, 0)
+# Espinhos
+Es = pygame.sprite.Sprite()
+Es.image = pygame.image.load("Recursos/NADA.jpg").subsurface((0, 0), (64, 64))
+Es.rect = pygame.Rect(0, 0, 0, 0)
 
 # Grupo de todos os sprites
 # Inimigo Vertical
@@ -54,6 +63,12 @@ Grupo_sprites_Ch.add(Ch)
 # Coração
 Grupo_sprites_Co = pygame.sprite.Group()
 Grupo_sprites_Co.add(Co)
+# Porta
+Grupo_sprites_Por = pygame.sprite.Group()
+Grupo_sprites_Por.add(Por)
+# Espinhos
+Grupo_sprites_Es = pygame.sprite.Group()
+Grupo_sprites_Es.add(Es)
 
 def TemposDosSprites():
     # Abelha
@@ -87,11 +102,9 @@ def Desenha_sprites(screen):
         # Abelha
         if Telas.fase[0] == -4:
             if Mapa.Inimigos_direcaoV[i] > 0:
-                IV.image = pygame.image.load("Recursos/Abelha_Baixo_4-1.png").subsurface(
-                    (sprites_ativos["Abelha"] * 64, 0), (64, 64))
+                IV.image = pygame.image.load("Recursos/Abelha_Baixo_4-1.png").subsurface((sprites_ativos["Abelha"] * 64, 0), (64, 64))
             else:
-                IV.image = pygame.image.load("Recursos/Abelha_Cima_4-1.png").subsurface(
-                    (sprites_ativos["Abelha"] * 64, 0), (64, 64))
+                IV.image = pygame.image.load("Recursos/Abelha_Cima_4-1.png").subsurface((sprites_ativos["Abelha"] * 64, 0), (64, 64))
         '''# Aranha
         elif Telas.fase[0] == -?:
             if Mapa.Inimigos_direcaoV[i] > 0:
@@ -146,3 +159,18 @@ def Desenha_sprites(screen):
     for i in range(len(Mapa.coracao)):
         Co.rect = Mapa.coracao[i]
         Grupo_sprites_Co.draw(screen)
+
+    # Porta
+    for i in range(len(Mapa.Portas)):
+        Por.rect = Mapa.Portas[i]
+        Grupo_sprites_Por.draw(screen)
+
+    # Espinho
+    for i in range(len(Mapa.Espinhos)):
+        Es.rect = Mapa.Espinhos[i]
+        if Mapa.Espinhos_estado[i] == "ativo":
+            Es.image = pygame.image.load("Recursos/spikes.png").subsurface((0, 0), (64, 64))
+        elif Mapa.Espinhos_estado[i] == "desativado":
+            Es.image = pygame.image.load("Recursos/spikes.png").subsurface((64, 0), (64, 64))
+        Es.image = pygame.transform.scale(Es.image, (120, 120))
+        Grupo_sprites_Es.draw(screen)

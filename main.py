@@ -11,7 +11,6 @@ JLargura = 32
 JAltura = 32
 # janela
 tela = pygame.display.set_mode([TLargura, TAltura])
-
 # retangulo do jogador
 retJ = pygame.Rect((TLargura/2) - (JLargura/2), (TAltura/2) - (JAltura/2), JLargura, JAltura)
 
