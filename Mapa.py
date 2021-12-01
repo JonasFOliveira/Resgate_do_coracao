@@ -3,8 +3,8 @@ import pygame
 # Variaveis
 bloco_largura = 200
 bloco_altura = 200
-velocidade = 20
-VelocidadeInimigo = 25
+velocidade = 18
+VelocidadeInimigo = 23
 Vidas = []
 coracao = []
 Chave_pega = []
@@ -179,7 +179,7 @@ def Espinho(retjogador, map):
                 Espinhos_tempo[i] = 0
         if Espinhos_estado[i] == "desativado":
             Espinhos_tempo[i] += 1
-            if Espinhos_tempo[i] >= 40:
+            if Espinhos_tempo[i] >= 30:
                 Espinhos_estado[i] = "ativo"
                 Espinhos_tempo[i] = 0
         if Espinhos[i].colliderect(retjogador):

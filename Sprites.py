@@ -108,7 +108,8 @@ def Desenha_sprites(screen):
             else:
                 IV.image = pygame.image.load("Recursos/Aranha_Cima_9-1.png").subsurface((sprites_ativos["Aranha"] * 64, 0), (64, 64))'''
         IV.image = pygame.transform.scale(IV.image, (200, 200))
-        Grupo_sprites_IV.draw(screen)
+        if IV.rect.left > -200 and IV.rect.right < 1416 and IV.rect.top > -200 and IV.rect.bottom < 904:
+            Grupo_sprites_IV.draw(screen)
 
     # Inimigo Horizontal
     for i in range(len(Mapa.InimigosH)):
@@ -127,7 +128,8 @@ def Desenha_sprites(screen):
             else:
                 IH.image = pygame.image.load("Recursos/Aranha_Esquerda_9-1.png").subsurface((sprites_ativos["Aranha"] * 64, 0), (64, 64))'''
         IH.image = pygame.transform.scale(IH.image, (200, 200))
-        Grupo_sprites_IH.draw(screen)
+        if IH.rect.left > -200 and IH.rect.right < 1416 and IH.rect.top > -200 and IH.rect.bottom < 904:
+            Grupo_sprites_IH.draw(screen)
 
     # Parede
     for i in range(len(Mapa.Paredes)):
@@ -139,27 +141,32 @@ def Desenha_sprites(screen):
         elif Telas.fase[0] == -?:
             Pa.image = pygame.image.load("Recursos/Pedras.png")'''
         Pa.image = pygame.transform.scale(Pa.image, (200, 200))
-        Grupo_sprites_Pa.draw(screen)
+        if Pa.rect.left > -200 and Pa.rect.right < 1416 and Pa.rect.top > -200 and Pa.rect.bottom < 904:
+            Grupo_sprites_Pa.draw(screen)
 
     # Chave
     for i in range(len(Mapa.Chaves)):
         Ch.rect = Mapa.Chaves[i]
-        Grupo_sprites_Ch.draw(screen)
+        if Ch.rect.left > -200 and Ch.rect.right < 1416 and Ch.rect.top > -200 and Ch.rect.bottom < 904:
+            Grupo_sprites_Ch.draw(screen)
 
     # Baú
     for i in range(len(Mapa.Baus)):
         Bau.rect = Mapa.Baus[i]
-        Grupo_sprites_Bau.draw(screen)
+        if Bau.rect.left > -200 and Bau.rect.right < 1416 and Bau.rect.top > -200 and Bau.rect.bottom < 904:
+            Grupo_sprites_Bau.draw(screen)
 
     # Coração
     for i in range(len(Mapa.coracao)):
         Co.rect = Mapa.coracao[i]
-        Grupo_sprites_Co.draw(screen)
+        if Co.rect.left > -200 and Co.rect.right < 1416 and Co.rect.top > -200 and Co.rect.bottom < 904:
+            Grupo_sprites_Co.draw(screen)
 
     # Porta
     for i in range(len(Mapa.Portas)):
         Por.rect = Mapa.Portas[i]
-        Grupo_sprites_Por.draw(screen)
+        if Por.rect.left > -200 and Por.rect.right < 1416 and Por.rect.top > -200 and Por.rect.bottom < 904:
+            Grupo_sprites_Por.draw(screen)
 
     # Espinho
     for i in range(len(Mapa.Espinhos)):
@@ -169,4 +176,5 @@ def Desenha_sprites(screen):
         elif Mapa.Espinhos_estado[i] == "desativado":
             Es.image = pygame.image.load("Recursos/spikes.png").subsurface((64, 0), (64, 64))
         Es.image = pygame.transform.scale(Es.image, (200, 200))
-        Grupo_sprites_Es.draw(screen)
+        if Es.rect.left > -200 and Es.rect.right < 1416 and Es.rect.top > -200 and Es.rect.bottom < 904:
+            Grupo_sprites_Es.draw(screen)
