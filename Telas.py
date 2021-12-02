@@ -99,7 +99,7 @@ def cutscene1(t):
         escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
 
         pygame.display.update()
-        pygame.time.Clock().tick(60)
+        pygame.time.Clock().tick(30)
     if not menu:
         fase[0] = 4
 

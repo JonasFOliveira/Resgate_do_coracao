@@ -17,10 +17,10 @@ retJ = pygame.Rect((TLargura/2) - (JLargura/2), (TAltura/2) - (JAltura/2), JLarg
 Quit = False
 while not Quit:
     pygame.display.update()
-    pygame.time.Clock().tick(120)
-    tela.fill((255, 255, 255))
+    pygame.time.Clock().tick(30)
+    #tela.fill((255, 255, 255))
+    #Mapa.Desenha_coisas(tela)
     Quit = Telas.FaseJogo(tela, retJ)
-    Mapa.Desenha_coisas(tela)
     Sprites.TemposDosSprites()
     Sprites.Atualiza_sprites()
     Sprites.Desenha_sprites(tela)
