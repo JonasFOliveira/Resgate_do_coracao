@@ -204,7 +204,7 @@ def Desenha_sprites(screen):
     # Inimigo Vertical
     for i in range(len(Mapa.InimigosV)):
         # Abelha
-        if Telas.fase[0] == -5:
+        if Telas.fase[0] == -4:
             Mapa.InimigosV[i] = pygame.Rect(Mapa.InimigosV[i].left, Mapa.InimigosV[i].top, Mapa.bloco_largura, 133)
             IV.rect = Mapa.InimigosV[i]
             if Mapa.Inimigos_direcaoV[i] > 0:
@@ -236,7 +236,7 @@ def Desenha_sprites(screen):
     # Inimigo Horizontal
     for i in range(len(Mapa.InimigosH)):
         # Abelha
-        if Telas.fase[0] == -5:
+        if Telas.fase[0] == -4:
             Mapa.InimigosH[i] = pygame.Rect(Mapa.InimigosH[i].left, Mapa.InimigosH[i].top, 133, Mapa.bloco_altura)
             IH.rect = Mapa.InimigosH[i]
             if Mapa.Inimigos_direcaoH[i] > 0:

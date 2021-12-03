@@ -5,7 +5,7 @@ import Mapa_matriz
 
 pygame.init()
 fase = [1]
-Som_pagina = pygame.mixer.Sound("Recursos/PassandoAPagina.wav")
+Som_pagina = pygame.mixer.Sound("Recursos/sons e musicas/PassandoAPagina.wav")
 font = pygame.font.SysFont('Arial', 25, True, False)
 
 def FaseJogo(screen, retjogador):
