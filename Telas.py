@@ -10,6 +10,9 @@ font = pygame.font.SysFont('Arial', 25, True, False)
 
 def FaseJogo(screen, retjogador):
     Q = False
+    if fase[0] == -1:
+        Mapa.Deletar_mapa()
+        Q = Fim_de_jogo(screen)
     if fase[0] == 1:
         Mapa.Deletar_mapa()
         Mapa.Vidas = ["vida", "vida", "vida"]
@@ -22,13 +25,15 @@ def FaseJogo(screen, retjogador):
         Mapa.Deletar_mapa()
         Mapa.Monta_mapa(Mapa_matriz.Matriz_mapa1)
         fase[0] = -4
+    # Quando perder todas as vidas
     if Mapa.Vidas == []:
-        fase[0] = 1
+        fase[0] = -1
     # passa para o proximo
     for i in range(len(Mapa.Fim)):
         if retjogador.left > Mapa.Fim[i].left and retjogador.right < Mapa.Fim[i].right and \
                 retjogador.top > Mapa.Fim[i].top - 10 and retjogador.bottom < Mapa.Fim[i].bottom + 10:
             if fase[0] == -4:
+                Som_pagina.play()
                 fase[0] = 1
     return Q
 
@@ -126,6 +131,20 @@ def options(t):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 click = True
+
+# Game Over
+def Fim_de_jogo(t):
+    t.fill((0, 0, 0))
+    escrever_texto("Fim de Jogo", font, (255, 255, 255), t, 530, 250)
+    escrever_texto('Pressione "Espaço" para voltar ao menu', font, (255, 255, 255), t, 720, 670)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            return True
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE or event.key == pygame.K_SPACE:
+                Som_pagina.play()
+                fase[0] = 1
 
 def escrever_texto(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)

@@ -48,10 +48,10 @@ def Monta_mapa(matriz):
                 Espinhos_estado.append("ativo")
                 Espinhos_tempo.append(0)
             elif matriz[Y][X] == 5:
-                InimigosH.append(pygame.Rect(X * bloco_largura - inix, Y * bloco_altura - iniy, bloco_largura, bloco_altura))
+                InimigosH.append(pygame.Rect(X * bloco_largura - inix, Y * bloco_altura - iniy, 133, bloco_altura))
                 Inimigos_direcaoH.append(VelocidadeInimigo)
             elif matriz[Y][X] == 6:
-                InimigosV.append(pygame.Rect(X * bloco_largura - inix, Y * bloco_altura - iniy, bloco_largura, bloco_altura))
+                InimigosV.append(pygame.Rect(X * bloco_largura - inix, Y * bloco_altura - iniy, bloco_largura, 133))
                 Inimigos_direcaoV.append(VelocidadeInimigo)
             elif matriz[Y][X] == 7:
                 if len(Vidas) != 3:

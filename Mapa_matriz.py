@@ -1,4 +1,4 @@
-# 1-parede, 2-porta, 3-baù & chave, 4-espinhos, 5-inimigoh , 6-inimigov, 7-vida, 8-fim, 9-inicio, 10-Fundo
+# 1-parede, 2-porta, 3-baù & chave, 4-espinhos, 5-inimigoh , 6-inimigov, 7-vida, 8-fim, 9-inicio
 
 Matriz_mapa_teste = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  # 1
                      [1, 3, 0, 1, 0, 2, 0, 6, 0, 0, 0, 1, 5, 0, 0, 0, 0, 1, 0, 0, 8],  # 2
