@@ -80,4 +80,4 @@ def cutscene2():
                     musica.play()
 
         pygame.display.update()
-        fpsClock.tick(60)
+        fpsClock.tick(30)
