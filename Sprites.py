@@ -5,7 +5,7 @@ import Telas
 # Tempo dos sprites
 sprites_tempo = [0]
 # Qual sprite está ativo
-sprites_ativos = {"Abelha": 0, "Aranha": 0, "Morcego": 0}
+sprites_ativos = {"Abelha": 0, "Aranha": 0, "Morcego": 0, "Edgar": 0}
 
 # Imagens
 # Abelha
@@ -36,6 +36,8 @@ Chave = pygame.image.load("Recursos/Chave.png")
 Coracao = pygame.image.load("Recursos/Coracao_3-1.png")
 Porta = pygame.image.load("Recursos/Porta.png")
 saida = pygame.image.load("Recursos/saida.png")
+# Edgar
+Edgar = pygame.image.load("Recursos/edgar 32bits.png")
 
 # Sprites
 # Inimigo Vertical
@@ -78,6 +80,10 @@ Fim = pygame.sprite.Sprite()
 Fim.image = saida
 Fim.image = pygame.transform.scale(Fim.image, (Mapa.bloco_largura, Mapa.bloco_altura))
 Fim.rect = pygame.Rect(0, 0, 0, 0)
+# Edgar
+ed = pygame.sprite.Sprite()
+ed.image = pygame.image.load("Recursos/NADA.jpg")
+ed.rect = pygame.Rect(0, 0, 0, 0)
 
 
 # Grupo de todos os sprites
@@ -108,6 +114,9 @@ Grupo_sprites_Es.add(Es)
 # Fim
 Grupo_sprites_Fim = pygame.sprite.Group()
 Grupo_sprites_Fim.add(Fim)
+# Edgar
+Grupo_sprites_ed = pygame.sprite.Group()
+Grupo_sprites_ed.add(ed)
 
 def TemposDosSprites():
     # Abelha
@@ -116,7 +125,7 @@ def TemposDosSprites():
         sprites_tempo[0] = 1
 
 # Atualiza sprites
-def Atualiza_sprites():
+def Atualiza_sprites(Andando):
     # Abelha
     if sprites_tempo[0] == 2:
         sprites_ativos["Abelha"] += 1
@@ -134,14 +143,23 @@ def Atualiza_sprites():
         if sprites_ativos["Morcego"] > 1:
             sprites_ativos["Morcego"] = 0
 
+    if not Andando:
+        sprites_ativos["Edgar"] = 0
+    else:
+        if sprites_tempo[0] == 2:
+            sprites_ativos["Edgar"] += 1
+            if sprites_ativos["Edgar"] > 2:
+                sprites_ativos["Edgar"] = 1
+
+
 # Desenha todos os sprites
 def Desenha_sprites(screen):
     # Fundo
     if Telas.fase[0] == -4:
         screen.fill((79, 125, 79))
-        '''elif Telas.fase == -?:
+    if Telas.fase[0] == -5:
         screen.fill((109, 88, 54))
-    elif Telas.fase[0] == -?:
+    '''elif Telas.fase[0] == -?:
         screen.fill((51, 48, 44))'''
 
     # Parede
@@ -150,9 +168,9 @@ def Desenha_sprites(screen):
         # Arvore
         if Telas.fase[0] == -4:
             Pa.image = Arvores
-        '''# Pedras
-        elif Telas.fase[0] == -?:
-            Pa.image = Pedras'''
+        # Pedras
+        elif Telas.fase[0] == -5:
+            Pa.image = Pedras
         '''# Estalagmite
         elif Telas.fase[0] == -?:
             Pa.image = estalagmite'''
@@ -212,15 +230,15 @@ def Desenha_sprites(screen):
             else:
                 IV.image = Abelha_Cima.subsurface((sprites_ativos["Abelha"] * 60, 0), (60, 40))
             IV.image = pygame.transform.scale(IV.image, (Mapa.bloco_largura, 133))
-        '''# Aranha
-        elif Telas.fase[0] == -?:
+        # Aranha
+        elif Telas.fase[0] == -5:
             Mapa.InimigosV[i] = pygame.Rect(Mapa.InimigosV[i].left, Mapa.InimigosV[i].top, Mapa.bloco_largura, Mapa.bloco_altura)
             IV.rect = Mapa.InimigosV[i]
             if Mapa.Inimigos_direcaoV[i] > 0:
                 IV.image = Aranha_Baixo.subsurface((sprites_ativos["Aranha"] * 64, 0), (64, 64))
             else:
                 IV.image = Aranha_Cima.subsurface((sprites_ativos["Aranha"] * 64, 0), (64, 64))
-            IV.image = pygame.transform.scale(IV.image, (Mapa.bloco_largura, Mapa.bloco_altura))'''
+            IV.image = pygame.transform.scale(IV.image, (Mapa.bloco_largura, Mapa.bloco_altura))
         '''# Morcego
         if Telas.fase[0] == -4:
             Mapa.InimigosV[i] = pygame.Rect(Mapa.InimigosV[i].left, Mapa.InimigosV[i].top, Mapa.bloco_largura, 100)
@@ -244,16 +262,15 @@ def Desenha_sprites(screen):
             else:
                 IH.image = Abelha_Esquerda.subsurface((sprites_ativos["Abelha"] * 40, 0), (40, 60))
             IH.image = pygame.transform.scale(IH.image, (133, Mapa.bloco_altura))
-        '''
         # Aranha
-        elif Telas.fase[0] == -?:
+        elif Telas.fase[0] == -5:
             Mapa.InimigosH[i] = pygame.Rect(Mapa.InimigosH[i].left, Mapa.InimigosH[i].top, Mapa.bloco_largura, Mapa.bloco_altura)
             IH.rect = Mapa.InimigosH[i]
             if Mapa.Inimigos_direcaoH[i] > 0:
                 IH.image = Aranha_Direita.subsurface((sprites_ativos["Aranha"] * 64, 0), (64, 64))
             else:
                 IH.image = Aranha_Esquerda.subsurface((sprites_ativos["Aranha"] * 64, 0), (64, 64))
-            IH.image = pygame.transform.scale(IH.image, (Mapa.bloco_largura, Mapa.bloco_altura))'''
+            IH.image = pygame.transform.scale(IH.image, (Mapa.bloco_largura, Mapa.bloco_altura))
         '''
         # Morcego
         if Telas.fase[0] == -4:
@@ -266,4 +283,11 @@ def Desenha_sprites(screen):
             IH.image = pygame.transform.scale(IH.image, (100, Mapa.bloco_altura))'''
         if IH.rect.left > -Mapa.bloco_largura and IH.rect.right < 1216 + Mapa.bloco_largura and IH.rect.top > - Mapa.bloco_altura and IH.rect.bottom < 704 + Mapa.bloco_altura:
             Grupo_sprites_IH.draw(screen)
+def Player_sprite(retJogador, screen, Andando):
+    # Edgar
+    ed.rect = retJogador
+    ed.image = Edgar.subsurface((sprites_ativos["Edgar"] * 48, 0), (48, 58))
+
+    Grupo_sprites_ed.draw(screen)
+
 

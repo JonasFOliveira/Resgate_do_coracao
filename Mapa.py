@@ -1,4 +1,5 @@
 import pygame
+import Sons
 
 # Variaveis
 bloco_largura = 200
@@ -60,7 +61,7 @@ def Monta_mapa(matriz):
                 Fim.append(pygame.Rect(X * bloco_largura - inix, Y * bloco_altura - iniy, bloco_largura, bloco_altura))
 
 # Move tudo do mapa e gerencia as colissões do mapa
-def Move_mapa(RetDoJogador, direcao = "nada"):
+def Move_mapa(RetDoJogador, som, direcao = "nada"):
     for i in range(len(TodasAsCoisas)):
         for tc in TodasAsCoisas[i]:
             if direcao == "direita":
@@ -72,8 +73,8 @@ def Move_mapa(RetDoJogador, direcao = "nada"):
             elif direcao == "baixo":
                 tc.top -= velocidade
             if tc.colliderect(RetDoJogador):
-                PortaChave(RetDoJogador, direcao)
-                PegaChave(RetDoJogador, direcao)
+                PortaChave(RetDoJogador, direcao, som)
+                PegaChave(RetDoJogador, direcao, som)
                 if tc not in Espinhos and tc not in InimigosH and tc not in InimigosV and tc not in coracao and tc not in Fim:
                     Para_mapa(direcao)
 
@@ -91,12 +92,14 @@ def Para_mapa(direcao="nada"):
                 tudo.top += velocidade
 
 # Mecanica da Porta e da chave
-def PortaChave(retjogador, direcao):
+def PortaChave(retjogador, direcao, s):
     for i in range(len(Portas)):
         if Portas[i].colliderect(retjogador) and len(Chave_pega) > 0:
             del Chave_pega[-1]
             if Portas[i] != Portas[-1]:
                 del Portas[i]
+                if s:
+                    Sons.Destranca_porta.play()
                 if direcao == "direita":
                     Portas[i].left -= velocidade
                 elif direcao == "esquerda":
@@ -107,15 +110,19 @@ def PortaChave(retjogador, direcao):
                     Portas[i].top -= velocidade
             else:
                 del Portas[i]
+                if s:
+                    Sons.Destranca_porta.play()
             break
 
 # Pega chave
-def PegaChave(retjogador, direcao):
+def PegaChave(retjogador, direcao, s):
     for i in range(len(Chaves)):
         if Chaves[i].colliderect(retjogador):
             Chave_pega.append("chave")
             if Chaves[i] != Chaves[-1]:
                 del Chaves[i]
+                if s:
+                    Sons.Pega_chave.play()
                 if direcao == "direita":
                     Chaves[i].left -= velocidade
                 elif direcao == "esquerda":
@@ -126,26 +133,32 @@ def PegaChave(retjogador, direcao):
                     Chaves[i].top -= velocidade
             else:
                 del Chaves[i]
+                if s:
+                    Sons.Pega_chave.play()
             break
 
 # Baú
-def Bau(retjogador):
+def Bau(retjogador, som):
     for i in range(len(Baus)):
         if retjogador.right > Baus[i].left - 20 and retjogador.left < Baus[i].right + 20 and retjogador.bottom > Baus[i].top - 20 and retjogador.top < Baus[i].bottom + 20 and pygame.key.get_pressed()[pygame.K_SPACE]:
             del Baus[i]
+            if som:
+                Sons.Abre_bau.play()
             break
 
 # Vida
-def Vida(retjogador):
+def Vida(retjogador, som):
     for i in range(len(coracao)):
         if coracao[i].colliderect(retjogador):
             Vidas.append("vida")
             del coracao[i]
+            if som:
+                Sons.Pega_vida.play()
             break
 
 
 # Move o inimigo horizontal
-def InimigoH(retjogador, map):
+def InimigoH(retjogador, map, som):
     for i in range(len(InimigosH)):
         InimigosH[i].left += Inimigos_direcaoH[i]
         for p in Paredes:
@@ -154,11 +167,13 @@ def InimigoH(retjogador, map):
                 Inimigos_direcaoH[i] = -Inimigos_direcaoH[i]
         if InimigosH[i].colliderect(retjogador):
             Deletar_mapa()
+            if som:
+                Sons.Dano.play()
             del Vidas[-1]
             Monta_mapa(map)
 
 # Move o inimigo vertical
-def InimigoV(retjogador, map):
+def InimigoV(retjogador, map, som):
     for i in range(len(InimigosV)):
         InimigosV[i].top += Inimigos_direcaoV[i]
         for p in Paredes:
@@ -167,11 +182,13 @@ def InimigoV(retjogador, map):
                 Inimigos_direcaoV[i] = -Inimigos_direcaoV[i]
         if InimigosV[i].colliderect(retjogador):
             Deletar_mapa()
+            if som:
+                Sons.Dano.play()
             del Vidas[-1]
             Monta_mapa(map)
 
 # Espinhos
-def Espinho(retjogador, map):
+def Espinho(retjogador, map, som):
     for i in range(len(Espinhos)):
         if Espinhos_estado[i] == "ativo":
             Espinhos_tempo[i] += 1
@@ -186,6 +203,8 @@ def Espinho(retjogador, map):
         if Espinhos[i].colliderect(retjogador):
             if Espinhos_estado[i] == "ativo":
                 Deletar_mapa()
+                if som:
+                    Sons.Dano.play()
                 del Vidas[-1]
                 Monta_mapa(map)
 
