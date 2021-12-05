@@ -25,7 +25,7 @@ while not Quit:
     pygame.time.Clock().tick(30)
     #tela.fill((255, 255, 255))
     #Mapa.Desenha_coisas(tela)
-    Quit = Telas.FaseJogo(tela, retJ, Musica, Som)
+    Quit, Musica, Som = Telas.FaseJogo(tela, retJ, Musica, Som)
     Sprites.TemposDosSprites()
     Sprites.Atualiza_sprites(andando)
     Sprites.Desenha_sprites(tela)
