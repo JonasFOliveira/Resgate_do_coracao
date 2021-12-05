@@ -287,7 +287,7 @@ def Player_sprite(retJogador, screen, Andando):
     # Edgar
     ed.rect = retJogador
     ed.image = Edgar.subsurface((sprites_ativos["Edgar"] * 48, 0), (48, 58))
-
+    ed.image = pygame.transform.scale(ed.image, (58, 68))
     Grupo_sprites_ed.draw(screen)
 
 

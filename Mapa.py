@@ -5,7 +5,6 @@ import Sons
 bloco_largura = 200
 bloco_altura = 200
 velocidade = 18
-VelocidadeInimigo = 24
 Vidas = []
 coracao = []
 Chave_pega = []
@@ -50,10 +49,10 @@ def Monta_mapa(matriz):
                 Espinhos_tempo.append(0)
             elif matriz[Y][X] == 5:
                 InimigosH.append(pygame.Rect(X * bloco_largura - inix, Y * bloco_altura - iniy, 133, bloco_altura))
-                Inimigos_direcaoH.append(VelocidadeInimigo)
+                Inimigos_direcaoH.append(24)
             elif matriz[Y][X] == 6:
                 InimigosV.append(pygame.Rect(X * bloco_largura - inix, Y * bloco_altura - iniy, bloco_largura, 133))
-                Inimigos_direcaoV.append(VelocidadeInimigo)
+                Inimigos_direcaoV.append(24)
             elif matriz[Y][X] == 7:
                 if len(Vidas) != 3:
                     coracao.append(pygame.Rect(X * bloco_largura - inix + 81, Y * bloco_altura - iniy + 80, 37, 40))
@@ -61,38 +60,38 @@ def Monta_mapa(matriz):
                 Fim.append(pygame.Rect(X * bloco_largura - inix, Y * bloco_altura - iniy, bloco_largura, bloco_altura))
 
 # Move tudo do mapa e gerencia as colissões do mapa
-def Move_mapa(RetDoJogador, som, direcao = "nada"):
+def Move_mapa(RetDoJogador, V, som, direcao = "nada"):
     for i in range(len(TodasAsCoisas)):
         for tc in TodasAsCoisas[i]:
             if direcao == "direita":
-                tc.left -= velocidade
+                tc.left -= V
             elif direcao == "esquerda":
-                tc.left += velocidade
+                tc.left += V
             elif direcao == "cima":
-                tc.top += velocidade
+                tc.top += V
             elif direcao == "baixo":
-                tc.top -= velocidade
+                tc.top -= V
             if tc.colliderect(RetDoJogador):
-                PortaChave(RetDoJogador, direcao, som)
-                PegaChave(RetDoJogador, direcao, som)
+                PortaChave(RetDoJogador, direcao, som, V)
+                PegaChave(RetDoJogador, direcao, som, V)
                 if tc not in Espinhos and tc not in InimigosH and tc not in InimigosV and tc not in coracao and tc not in Fim:
-                    Para_mapa(direcao)
+                    Para_mapa(V, direcao)
 
 # Faz o mapa parar
-def Para_mapa(direcao="nada"):
+def Para_mapa( v, direcao="nada"):
     for index in range(len(TodasAsCoisas)):
         for tudo in TodasAsCoisas[index]:
             if direcao == "direita":
-                tudo.left += velocidade
+                tudo.left += v
             elif direcao == "esquerda":
-                tudo.left -= velocidade
+                tudo.left -= v
             elif direcao == "cima":
-                tudo.top -= velocidade
+                tudo.top -= v
             elif direcao == "baixo":
-                tudo.top += velocidade
+                tudo.top += v
 
 # Mecanica da Porta e da chave
-def PortaChave(retjogador, direcao, s):
+def PortaChave(retjogador, direcao, s, v):
     for i in range(len(Portas)):
         if Portas[i].colliderect(retjogador) and len(Chave_pega) > 0:
             del Chave_pega[-1]
@@ -101,13 +100,13 @@ def PortaChave(retjogador, direcao, s):
                 if s:
                     Sons.Destranca_porta.play()
                 if direcao == "direita":
-                    Portas[i].left -= velocidade
+                    Portas[i].left -= v
                 elif direcao == "esquerda":
-                    Portas[i].left += velocidade
+                    Portas[i].left += v
                 elif direcao == "cima":
-                    Portas[i].top += velocidade
+                    Portas[i].top += v
                 elif direcao == "baixo":
-                    Portas[i].top -= velocidade
+                    Portas[i].top -= v
             else:
                 del Portas[i]
                 if s:
@@ -115,7 +114,7 @@ def PortaChave(retjogador, direcao, s):
             break
 
 # Pega chave
-def PegaChave(retjogador, direcao, s):
+def PegaChave(retjogador, direcao, s, v):
     for i in range(len(Chaves)):
         if Chaves[i].colliderect(retjogador):
             Chave_pega.append("chave")
@@ -124,13 +123,13 @@ def PegaChave(retjogador, direcao, s):
                 if s:
                     Sons.Pega_chave.play()
                 if direcao == "direita":
-                    Chaves[i].left -= velocidade
+                    Chaves[i].left -= v
                 elif direcao == "esquerda":
-                    Chaves[i].left += velocidade
+                    Chaves[i].left += v
                 elif direcao == "cima":
-                    Chaves[i].top += velocidade
+                    Chaves[i].top += v
                 elif direcao == "baixo":
-                    Chaves[i].top -= velocidade
+                    Chaves[i].top -= v
             else:
                 del Chaves[i]
                 if s:

@@ -7,8 +7,8 @@ import Sprites
 pygame.init()
 TLargura = 1216
 TAltura = 704
-JLargura = 48
-JAltura = 58
+JLargura = 58
+JAltura = 68
 # janela
 tela = pygame.display.set_mode([TLargura, TAltura])
 # retangulo do jogador
@@ -33,16 +33,16 @@ while not Quit:
 
     chave = pygame.key.get_pressed()
     if chave[pygame.K_w]:
-        Mapa.Move_mapa(retJ, Som, direcao="cima")
+        Mapa.Move_mapa(retJ, Mapa.velocidade, Som, direcao="cima")
         andando = True
     if chave[pygame.K_s]:
-        Mapa.Move_mapa(retJ, Som, direcao="baixo")
+        Mapa.Move_mapa(retJ, Mapa.velocidade, Som, direcao="baixo")
         andando = True
     if chave[pygame.K_a]:
-        Mapa.Move_mapa(retJ, Som, direcao="esquerda")
+        Mapa.Move_mapa(retJ, Mapa.velocidade, Som, direcao="esquerda")
         andando = True
     if chave[pygame.K_d]:
-        Mapa.Move_mapa(retJ, Som, direcao="direita")
+        Mapa.Move_mapa(retJ, Mapa.velocidade, Som, direcao="direita")
         andando = True
 
     if Telas.fase[0] == -4:
