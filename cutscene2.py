@@ -1,7 +1,8 @@
-def cutscene2():
+# cutscene 2 -> 7
+def cutscene2(t, s):
     running = True
-    cutscene = SpriteSheet('Recursos/cutscene2_15-1.png', 15, 1)
-
+    t.fill((0, 0, 0))
+    cutscene = pygame.image.load('Recursos/Cutscene2_15-1.png')
     FrameAtualcutscene = 0
 
     button_1 = pygame.Rect(256, 500, 700, 50)
@@ -12,39 +13,52 @@ def cutscene2():
 
         mx, my = pygame.mouse.get_pos()
 
-        cutscene.blit(screen, FrameAtualcutscene, (0, 0), Origin.TopLeft)
+        naTela = cutscene.subsurface((FrameAtualcutscene * 1216, 0), (1216, 704))
+        t.blit(naTela, (0, 0))
+        escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
 
         click = False
         for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-                running = False
-            if event.type == KEYDOWN:
-                if event.key == K_SPACE:
+            if event.type == pygame.QUIT:
+                return True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    running = False
+                    if s:
+                        Som_pagina.play()
+                    fase[0] = 1
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
                     if FrameAtualcutscene < 4:
                         FrameAtualcutscene += 1
-                        musica.play()
+                        if s:
+                            Som_pagina.play()
                     if 6 <= FrameAtualcutscene <= 9:
                         FrameAtualcutscene += 1
-                        musica.play()
+                        if s:
+                            Som_pagina.play()
                         if FrameAtualcutscene == 9:
-                            main_menu()
+                            running = False
+                            fase[0] = 5
 
                     if FrameAtualcutscene == 5:
                         FrameAtualcutscene = 0
-                        musica.play()
+                        if s:
+                            Som_pagina.play()
                     if FrameAtualcutscene == 9:
                         FrameAtualcutscene = 10
-                        musica.play()
+                        if s:
+                            Som_pagina.play()
                     if FrameAtualcutscene == 14:
                         FrameAtualcutscene = 4
-                        musica.play()
+                        if s:
+                            Som_pagina.play()
                     if 11 <= FrameAtualcutscene <= 13:
                         FrameAtualcutscene = 14
-                        musica.play()
+                        if s:
+                            Som_pagina.play()
 
-            if event.type == MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     click = True
 
@@ -52,32 +66,44 @@ def cutscene2():
             if click:
                 if FrameAtualcutscene == 4:
                     FrameAtualcutscene = 5
-                    cutscene.blit(screen, FrameAtualcutscene, (0, 0), Origin.TopLeft)
-                    musica.play()
+                    naTela = cutscene.subsurface((FrameAtualcutscene * 1216, 0), (1216, 704))
+                    t.blit(naTela, (0, 0))
+                    if s:
+                        Som_pagina.play()
                 if FrameAtualcutscene == 10:
                     FrameAtualcutscene = 11
-                    cutscene.blit(screen, FrameAtualcutscene, (0, 0), Origin.TopLeft)
-                    musica.play()
+                    naTela = cutscene.subsurface((FrameAtualcutscene * 1216, 0), (1216, 704))
+                    t.blit(naTela, (0, 0))
+                    if s:
+                        Som_pagina.play()
         if button_2.collidepoint(mx, my):
             if click:
                 if FrameAtualcutscene == 4:
                     FrameAtualcutscene = 6
-                    cutscene.blit(screen, FrameAtualcutscene, (0, 0), Origin.TopLeft)
-                    musica.play()
+                    naTela = cutscene.subsurface((FrameAtualcutscene * 1216, 0), (1216, 704))
+                    t.blit(naTela, (0, 0))
+                    if s:
+                        Som_pagina.play()
                 if FrameAtualcutscene == 10:
                     FrameAtualcutscene = 12
-                    cutscene.blit(screen, FrameAtualcutscene, (0, 0), Origin.TopLeft)
-                    musica.play()
+                    naTela = cutscene.subsurface((FrameAtualcutscene * 1216, 0), (1216, 704))
+                    t.blit(naTela, (0, 0))
+                    if s:
+                        Som_pagina.play()
         if button_3.collidepoint(mx, my):
             if click:
                 if FrameAtualcutscene == 4:
                     FrameAtualcutscene = 9
-                    cutscene.blit(screen, FrameAtualcutscene, (0, 0), Origin.TopLeft)
-                    musica.play()
+                    naTela = cutscene.subsurface((FrameAtualcutscene * 1216, 0), (1216, 704))
+                    t.blit(naTela, (0, 0))
+                    if s:
+                        Som_pagina.play()
                 if FrameAtualcutscene == 10:
                     FrameAtualcutscene = 13
-                    cutscene.blit(screen, FrameAtualcutscene, (0, 0), Origin.TopLeft)
-                    musica.play()
+                    naTela = cutscene.subsurface((FrameAtualcutscene * 1216, 0), (1216, 704))
+                    t.blit(naTela, (0, 0))
+                    if s:
+                        Som_pagina.play()
 
         pygame.display.update()
-        fpsClock.tick(30)
+        pygame.time.Clock().tick(30)
