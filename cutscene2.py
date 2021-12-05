@@ -1,6 +1,4 @@
-# cutscene 2 -> 7
-def cutscene2(t, s):
-    running = True
+running = True
     t.fill((0, 0, 0))
     cutscene = pygame.image.load('Recursos/Cutscene2_15-1.png')
     FrameAtualcutscene = 0
@@ -15,7 +13,10 @@ def cutscene2(t, s):
 
         naTela = cutscene.subsurface((FrameAtualcutscene * 1216, 0), (1216, 704))
         t.blit(naTela, (0, 0))
-        escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
+        if FrameAtualcutscene == 4 or FrameAtualcutscene == 10:
+            escrever_texto('Selecione uma opção', font, (255, 255, 255), t, 750, 670)
+        else:
+            escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
 
         click = False
         for event in pygame.event.get():
