@@ -101,8 +101,9 @@ def FaseJogo(screen, retjogador, musica, som):
 
 # Menu -> 1
 def main_menu(t, s):
-    menu = SpriteSheet('Recursos/menu-livro.png', 4, 1)
-    menu.blit(t, 0, (0, 0), Origin.TopLeft)
+    menu = pygame.image.load("Recursos/menu-livro.png")
+    naTela = menu.subsurface((0, 0), (1216, 704))
+    t.blit(naTela, (0, 0))
 
     mx, my = pygame.mouse.get_pos()
 
@@ -111,11 +112,14 @@ def main_menu(t, s):
     button_3 = pygame.Rect(700, 365, 200, 50)
 
     if button_1.collidepoint((mx, my)):
-        menu.blit(t, 1, (0, 0), Origin.TopLeft)
+        naTela = menu.subsurface((1 * 1216, 0), (1216, 704))
+        t.blit(naTela, (0, 0))
     if button_2.collidepoint((mx, my)):
-        menu.blit(t, 2, (0, 0), Origin.TopLeft)
+        naTela = menu.subsurface((2 * 1216, 0), (1216, 704))
+        t.blit(naTela, (0, 0))
     if button_3.collidepoint((mx, my)):
-        menu.blit(t, 3, (0, 0), Origin.TopLeft)
+        naTela = menu.subsurface((3 * 1216, 0), (1216, 704))
+        t.blit(naTela, (0, 0))
 
     click = False
     for event in pygame.event.get():
@@ -174,7 +178,6 @@ def cutscene1(t, s):
 def cutscene2(t, s):
     running = True
     cutscene = SpriteSheet('Recursos/cutscene2_15-1.png', 15, 1)
-
     FrameAtualcutscene = 0
 
     button_1 = pygame.Rect(256, 500, 700, 50)
