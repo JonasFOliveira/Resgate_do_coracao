@@ -27,9 +27,9 @@ while not Quit:
     Sprites.TemposDosSprites()
     Sprites.Atualiza_sprites(andando)
     Sprites.Desenha_sprites(tela)
-    if Telas.fase[0] == -4 or Telas.fase[0] == -5:
+    if Telas.fase[0] == -4 or Telas.fase[0] == -5 or Telas.fase[0] == -6:
         #pygame.draw.rect(tela, (0, 0, 255), retJ)
-        Sprites.Player_sprite(retJ, tela, andando)
+        Sprites.Player_sprite(retJ, tela)
 
     chave = pygame.key.get_pressed()
     if chave[pygame.K_w]:
@@ -49,6 +49,8 @@ while not Quit:
         mapa = Mapa_matriz.Matriz_mapa1
     elif Telas.fase[0] == -5:
         mapa = Mapa_matriz.Matriz_mapa2
+    elif Telas.fase[0] == -6:
+        mapa = Mapa_matriz.Matriz_mapa3
     else:
         mapa = None
     Mapa.Bau(retJ, Som)
