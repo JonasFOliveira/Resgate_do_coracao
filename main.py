@@ -11,6 +11,8 @@ JLargura = 58
 JAltura = 68
 # janela
 tela = pygame.display.set_mode([TLargura, TAltura])
+pygame.display.set_caption("Resgate do coração")
+pygame.display.set_icon(pygame.image.load("Recursos/icone.png"))
 # retangulo do jogador
 retJ = pygame.Rect((TLargura/2) - (JLargura/2), (TAltura/2) - (JAltura/2), JLargura, JAltura)
 andando = False
@@ -30,6 +32,7 @@ while not Quit:
     if Telas.fase[0] == -4 or Telas.fase[0] == -5 or Telas.fase[0] == -6:
         #pygame.draw.rect(tela, (0, 0, 255), retJ)
         Sprites.Player_sprite(retJ, tela)
+        Sprites.Status(tela)
 
     chave = pygame.key.get_pressed()
     if chave[pygame.K_w]:

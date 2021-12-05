@@ -7,7 +7,6 @@ fase = [1]
 Som_pagina = pygame.mixer.Sound("Recursos/sons e musicas/PassandoAPagina.wav")
 font = pygame.font.SysFont('Arial', 25, True, False)
 
-
 def FaseJogo(screen, retjogador, musica, som):
     Q = False
     # menu
@@ -21,7 +20,7 @@ def FaseJogo(screen, retjogador, musica, som):
             pygame.mixer.music.play(-1)
             pygame.mixer.music.set_volume(0.4)
         Mapa.Vidas = ["vida", "vida", "vida"]
-        fase[0] = 5
+        fase[0] = -1
     elif fase[0] == -1:
         Q = main_menu(screen, som)
     # cutscene 1
