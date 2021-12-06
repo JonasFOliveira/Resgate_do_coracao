@@ -287,6 +287,7 @@ def Desenha_sprites(screen):
             IH.image = pygame.transform.scale(IH.image, (100, bloco_altura))
         if IH.rect.left > -bloco_largura and IH.rect.right < 1216 + bloco_largura and IH.rect.top > - bloco_altura and IH.rect.bottom < 704 + bloco_altura:
             Grupo_sprites_IH.draw(screen)
+
 def Player_sprite(retJogador, screen):
     # Edgar
     ed.rect = retJogador

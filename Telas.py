@@ -6,8 +6,9 @@ import Sons
 pygame.init()
 fase = [1]
 Som_pagina = Sons.Pagina
-font = pygame.font.SysFont('Arial', 25, True, False)
+font = pygame.font.SysFont('Arial', 20, True, False)
 
+# 1-menu, 2-cutscene 1, 3-opçoes, 4-fase 1, 5-fase 2, 6-fase 3, 7-cutscene 2, 8-cutscene 3, 9-cutscene 4, 10-game over, 11-Creditos
 def FaseJogo(screen, retjogador, musica, som):
     Q = False
     # menu
@@ -21,7 +22,7 @@ def FaseJogo(screen, retjogador, musica, som):
             pygame.mixer.music.play(-1)
             pygame.mixer.music.set_volume(0.4)
         Mapa.Vidas = ["vida", "vida", "vida"]
-        fase[0] = 7
+        fase[0] = -1
     elif fase[0] == -1:
         Q = main_menu(screen, som)
     # cutscene 1
@@ -214,7 +215,7 @@ def cutscene1(t, s):
         t.fill((0, 0, 0))
         naTela = cutscene.subsurface((FrameAtualcutscene * 1216, 0), (1216, 704))
         t.blit(naTela, (0, 0))
-        escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
+        escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 770, 675)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -228,7 +229,7 @@ def cutscene1(t, s):
                     running = False
                     if s:
                         Som_pagina.play()
-                    fase[0] = 1
+                    fase[0] = 4
         pygame.display.update()
         pygame.time.Clock().tick(30)
 
@@ -251,9 +252,9 @@ def cutscene2(t, s):
         t.blit(naTela, (0, 0))
 
         if FrameAtualcutscene == 4 or FrameAtualcutscene == 10:
-            escrever_texto('Selecione uma opção', font, (255, 255, 255), t, 916, 670)
+            escrever_texto('Selecione uma opção', font, (255, 255, 255), t, 840, 675)
         else:
-            escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
+            escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 770, 675)
 
         click = False
         for event in pygame.event.get():
@@ -264,7 +265,7 @@ def cutscene2(t, s):
                     running = False
                     if s:
                         Som_pagina.play()
-                    fase[0] = 1
+                    fase[0] = 5
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     if FrameAtualcutscene < 4:
@@ -363,9 +364,9 @@ def cutscene3(t, s):
         t.blit(naTela, (0, 0))
 
         if FrameAtualcutscene == 2:
-            escrever_texto('Selecione uma opção', font, (255, 255, 255), t, 916, 670)
+            escrever_texto('Selecione uma opção', font, (255, 255, 255), t, 840, 675)
         else:
-            escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
+            escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 770, 675)
 
         mx, my = pygame.mouse.get_pos()
 
@@ -378,7 +379,7 @@ def cutscene3(t, s):
                     running = False
                     if s:
                         Som_pagina.play()
-                    fase[0] = 1
+                    fase[0] = 6
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     if FrameAtualcutscene < 2:
@@ -450,10 +451,9 @@ def cutscene4(t, s):
         t.blit(naTela, (0, 0))
 
         if FrameAtualcutscene == 3 or FrameAtualcutscene == 11:
-
-            escrever_texto('Selecione uma opção', font, (255, 255, 255), t, 916, 670)
+            escrever_texto('Selecione uma opção', font, (255, 255, 255), t, 840, 675)
         else:
-            escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
+            escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 770, 675)
 
         mx, my = pygame.mouse.get_pos()
 
@@ -467,7 +467,7 @@ def cutscene4(t, s):
                     running = False
                     if s:
                         Som_pagina.play()
-                    fase[0] = 1
+                    fase[0] = 11
                 if event.key == pygame.K_SPACE:
 
                     if FrameAtualcutscene <= 2:
@@ -547,7 +547,7 @@ def options(t, s, m):
 
     button_1 = pygame.Rect(600, 215, 300, 50)
     button_2 = pygame.Rect(600, 290, 300, 50)
-    button_3 = pygame.Rect(600, 365, 300, 50)
+    button_3 = pygame.Rect(600, 365, 500, 50)
 
     q = False
     Running = True
@@ -603,11 +603,16 @@ def options(t, s, m):
                     s = False
                 else:
                     s = True
-        if button_3.collidepoint(mx, my) and FrameAtual == 0:
+        if button_3.collidepoint(mx, my):
             if click:
-                FrameAtual = 1
-                if s:
-                    Som_pagina.play()
+                if FrameAtual == 1:
+                    if s:
+                        Som_pagina.play()
+                    FrameAtual = 0
+                else:
+                    if s:
+                        Som_pagina.play()
+                    FrameAtual = 1
         pygame.display.update()
         pygame.time.Clock().tick(30)
     return q, m, s

@@ -21,6 +21,7 @@ Som = True
 
 Quit = False
 while not Quit:
+    # setando em 30 FPS
     pygame.display.update()
     pygame.time.Clock().tick(30)
 

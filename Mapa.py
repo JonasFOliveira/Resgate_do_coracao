@@ -155,7 +155,6 @@ def Vida(retjogador, som):
                 Sons.Pega_vida.play()
             break
 
-
 # Move o inimigo horizontal
 def InimigoH(retjogador, map, som):
     for i in range(len(InimigosH)):
