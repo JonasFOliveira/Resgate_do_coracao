@@ -350,7 +350,7 @@ def cutscene2(t, s):
 def cutscene3(t, s):
     running = True
     t.fill((0, 0, 0))
-    cutscene = pygame.image.load('Recursos/Cutscene3_11-1.jpg')
+    cutscene = pygame.image.load('Recursos/Cutscene3_11_1.png.png')
     FrameAtualcutscene = 0
 
     button_1 = pygame.Rect(256, 500, 700, 50)
