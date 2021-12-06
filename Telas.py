@@ -21,7 +21,7 @@ def FaseJogo(screen, retjogador, musica, som):
             pygame.mixer.music.play(-1)
             pygame.mixer.music.set_volume(0.4)
         Mapa.Vidas = ["vida", "vida", "vida"]
-        fase[0] = -1
+        fase[0] = 7
     elif fase[0] == -1:
         Q = main_menu(screen, som)
     # cutscene 1
@@ -280,7 +280,7 @@ def cutscene2(t, s):
                             fase[0] = 5
 
                     if FrameAtualcutscene == 5:
-                        FrameAtualcutscene = 0
+                        FrameAtualcutscene = 4
                         if s:
                             Som_pagina.play()
                     if FrameAtualcutscene == 9:
