@@ -280,7 +280,7 @@ def cutscene2(t, s):
                             fase[0] = 5
 
                     if FrameAtualcutscene == 5:
-                        FrameAtualcutscene = 0
+                        FrameAtualcutscene = 4
                         if s:
                             Som_pagina.play()
                     if FrameAtualcutscene == 9:
