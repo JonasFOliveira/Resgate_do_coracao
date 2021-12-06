@@ -280,7 +280,7 @@ def cutscene2(t, s):
                             fase[0] = 5
 
                     if FrameAtualcutscene == 5:
-                        FrameAtualcutscene = 4
+                        FrameAtualcutscene = 0
                         if s:
                             Som_pagina.play()
                     if FrameAtualcutscene == 9:
@@ -350,7 +350,7 @@ def cutscene2(t, s):
 def cutscene3(t, s):
     running = True
     t.fill((0, 0, 0))
-    cutscene = pygame.image.load('Recursos/Cutscene3_11_1.png.png')
+    cutscene = pygame.image.load('Recursos/cutscene3_11_1.png.png')
     FrameAtualcutscene = 0
 
     button_1 = pygame.Rect(256, 500, 700, 50)
@@ -658,7 +658,6 @@ def creditos(t, s):
                         if s:
                             Som_pagina.play()
                         FrameAtual = 0
-
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
