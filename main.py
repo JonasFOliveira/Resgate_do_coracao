@@ -23,13 +23,14 @@ Quit = False
 while not Quit:
     pygame.display.update()
     pygame.time.Clock().tick(30)
-    #tela.fill((255, 255, 255))
-    #Mapa.Desenha_coisas(tela)
+
     Quit, Musica, Som = Telas.FaseJogo(tela, retJ, Musica, Som)
     Sprites.TemposDosSprites()
     Sprites.Atualiza_sprites(andando)
     Sprites.Desenha_sprites(tela)
     if Telas.fase[0] == -4 or Telas.fase[0] == -5 or Telas.fase[0] == -6:
+        #tela.fill((255, 255, 255))
+        #Mapa.Desenha_coisas(tela)
         #pygame.draw.rect(tela, (0, 0, 255), retJ)
         Sprites.Player_sprite(retJ, tela)
         Sprites.Status(tela)

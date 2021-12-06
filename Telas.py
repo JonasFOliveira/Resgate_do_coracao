@@ -1,10 +1,11 @@
 import pygame
 import Mapa
 import Mapa_matriz
+import Sons
 
 pygame.init()
 fase = [1]
-Som_pagina = pygame.mixer.Sound("Recursos/sons e musicas/PassandoAPagina.wav")
+Som_pagina = Sons.Pagina
 font = pygame.font.SysFont('Arial', 25, True, False)
 
 def FaseJogo(screen, retjogador, musica, som):
@@ -50,7 +51,7 @@ def FaseJogo(screen, retjogador, musica, som):
         if musica:
             pygame.mixer.music.load("Recursos/sons e musicas/fase2_tema.wav")
             pygame.mixer.music.play(-1)
-            pygame.mixer.music.set_volume(0.2)
+            pygame.mixer.music.set_volume(0.4)
         Mapa.Monta_mapa(Mapa_matriz.Matriz_mapa2)
         fase[0] = -5
     # fase 3
@@ -98,8 +99,7 @@ def FaseJogo(screen, retjogador, musica, som):
         pygame.mixer.music.stop()
         # inicia
         if musica:
-            pygame.mixer.music.load(
-                "Recursos/sons e musicas/menu_cutscene_tema_Vashti_Bunyan_If_I_Were_Same_But_Different.wav")
+            pygame.mixer.music.load("Recursos/sons e musicas/menu_cutscene_tema_Vashti_Bunyan_If_I_Were_Same_But_Different.wav")
             pygame.mixer.music.play(-1)
             pygame.mixer.music.set_volume(0.4)
         fase[0] = -9
@@ -114,11 +114,24 @@ def FaseJogo(screen, retjogador, musica, som):
         if musica:
             pygame.mixer.music.load("Recursos/sons e musicas/game-over.wav")
             pygame.mixer.music.play()
-            pygame.mixer.music.set_volume(0.2)
+            pygame.mixer.music.set_volume(0.4)
         Mapa.Vidas = ["vida", "vida", "vida"]
         fase[0] = -10
     elif fase[0] == -10:
         Q = Fim_de_jogo(screen, som)
+    # Creditos
+    elif fase[0] == 11:
+        # finaliza
+        Mapa.Deletar_mapa()
+        pygame.mixer.music.stop()
+        # inicia
+        if musica:
+            pygame.mixer.music.load("Recursos/sons e musicas/creditos_tema.wav")
+            pygame.mixer.music.play(-1)
+            pygame.mixer.music.set_volume(0.4)
+        fase[0] = -11
+    elif fase[0] == -11:
+       Q = creditos(screen, som)
     # Quando perder todas as vidas
     if Mapa.Vidas == []:
         fase[0] = 10
@@ -180,6 +193,11 @@ def main_menu(t, s):
             if s:
                 Som_pagina.play()
             fase[0] = 3
+    if button_3.collidepoint((mx, my)):
+        if click:
+            if s:
+                Som_pagina.play()
+            fase[0] = 11
 
 # cutscene1 -> 2
 def cutscene1(t, s):
@@ -233,7 +251,7 @@ def cutscene2(t, s):
         t.blit(naTela, (0, 0))
 
         if FrameAtualcutscene == 4 or FrameAtualcutscene == 10:
-            escrever_texto('Selecione uma opção', font, (255, 255, 255), t, 750, 670)
+            escrever_texto('Selecione uma opção', font, (255, 255, 255), t, 916, 670)
         else:
             escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
 
@@ -345,7 +363,7 @@ def cutscene3(t, s):
         t.blit(naTela, (0, 0))
 
         if FrameAtualcutscene == 2:
-            escrever_texto('Selecione uma opção', font, (255, 255, 255), t, 750, 670)
+            escrever_texto('Selecione uma opção', font, (255, 255, 255), t, 916, 670)
         else:
             escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
 
@@ -433,7 +451,7 @@ def cutscene4(t, s):
 
         if FrameAtualcutscene == 3 or FrameAtualcutscene == 11:
 
-            escrever_texto('Selecione uma opção', font, (255, 255, 255), t, 750, 670)
+            escrever_texto('Selecione uma opção', font, (255, 255, 255), t, 916, 670)
         else:
             escrever_texto('Pressione "Espaço" para continuar...', font, (255, 255, 255), t, 750, 670)
 
@@ -469,7 +487,7 @@ def cutscene4(t, s):
 
                     if FrameAtualcutscene == 42:
                         running = False
-                        fase[0] = 1
+                        fase[0] = 11
 
                     if FrameAtualcutscene == 12:
                         FrameAtualcutscene = 11
@@ -608,6 +626,56 @@ def Fim_de_jogo(t, s):
                 if s:
                     Som_pagina.play()
                 fase[0] = 1
+
+# Creditos
+def creditos(t, s):
+    t.fill((0, 0, 0))
+    creditos = pygame.image.load("Recursos/Creditos.png")
+    FrameAtual = 0
+
+    button_1 = pygame.Rect(700, 215, 400, 50)
+
+    Running = True
+    while Running:
+
+        mx, my = pygame.mouse.get_pos()
+
+        naTela = creditos.subsurface((FrameAtual * 1216, 0), (1216, 704))
+        t.blit(naTela, (0, 0))
+
+        click = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    if FrameAtual == 0:
+                        if s:
+                            Som_pagina.play()
+                        Running = False
+                        fase[0] = 1
+                    if FrameAtual == 1:
+                        if s:
+                            Som_pagina.play()
+                        FrameAtual = 0
+
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
+
+            if button_1.collidepoint(mx, my):
+                if click:
+                    if FrameAtual == 0:
+                        if s:
+                            Som_pagina.play()
+                        FrameAtual = 1
+                    else:
+                        if s:
+                            Som_pagina.play()
+                        FrameAtual = 0
+        pygame.display.update()
+        pygame.time.Clock().tick(30)
 
 def escrever_texto(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)

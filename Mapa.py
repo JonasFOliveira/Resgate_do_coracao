@@ -2,8 +2,6 @@ import pygame
 import Sons
 
 # Variaveis
-bloco_largura = 200
-bloco_altura = 200
 velocidade = 18
 Vidas = []
 coracao = []
@@ -23,6 +21,9 @@ Fim = []
 TodasAsCoisas = [Paredes, Portas, Baus, Chaves, Espinhos, InimigosH, InimigosV, coracao, Fim]
 
 def Monta_mapa(matriz):
+    bloco_largura = 200
+    bloco_altura = 200
+    caixa = 90
     # Posição inicial
     inix = 0
     iniy = 0
@@ -40,7 +41,6 @@ def Monta_mapa(matriz):
             elif matriz[Y][X] == 2:
                 Portas.append(pygame.Rect(X * bloco_largura - inix, Y * bloco_altura - iniy, bloco_largura, bloco_altura))
             elif matriz[Y][X] == 3:
-                caixa = 90
                 Baus.append(pygame.Rect(X * bloco_largura - inix + (200 - caixa)//2, Y * bloco_altura - iniy + (200 - caixa)//2, caixa, caixa))
                 Chaves.append(pygame.Rect(X * bloco_largura - inix + 66, Y * bloco_altura - iniy + 87, 71, 26))
             elif matriz[Y][X] == 4:

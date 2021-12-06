@@ -2,6 +2,8 @@ import pygame
 import Mapa
 import Telas
 
+bloco_largura = 200
+bloco_altura = 200
 # Tempo dos sprites
 sprites_tempo = [0]
 # Qual sprite está ativo
@@ -69,7 +71,7 @@ Co.rect = pygame.Rect(0, 0, 0, 0)
 # Porta
 Por = pygame.sprite.Sprite()
 Por.image = Porta
-Por.image = pygame.transform.scale(Por.image, (Mapa.bloco_largura, Mapa.bloco_altura))
+Por.image = pygame.transform.scale(Por.image, (bloco_largura, bloco_altura))
 Por.rect = pygame.Rect(0, 0, 0, 0)
 # Espinhos
 Es = pygame.sprite.Sprite()
@@ -78,7 +80,7 @@ Es.rect = pygame.Rect(0, 0, 0, 0)
 # Fim
 Fim = pygame.sprite.Sprite()
 Fim.image = saida
-Fim.image = pygame.transform.scale(Fim.image, (Mapa.bloco_largura, Mapa.bloco_altura))
+Fim.image = pygame.transform.scale(Fim.image, (bloco_largura, bloco_altura))
 Fim.rect = pygame.Rect(0, 0, 0, 0)
 # Edgar
 ed = pygame.sprite.Sprite()
@@ -154,6 +156,9 @@ def Atualiza_sprites(Andando):
 
 # Desenha todos os sprites
 def Desenha_sprites(screen):
+    bloco_largura = 200
+    bloco_altura = 200
+    
     # Fundo
     if Telas.fase[0] == -4:
         screen.fill((79, 125, 79))
@@ -174,32 +179,32 @@ def Desenha_sprites(screen):
         # Estalagmite
         elif Telas.fase[0] == -6:
             Pa.image = estalagmite
-        Pa.image = pygame.transform.scale(Pa.image, (Mapa.bloco_largura, Mapa.bloco_altura))
-        if Pa.rect.left > -Mapa.bloco_largura and Pa.rect.right < 1216 + Mapa.bloco_largura and Pa.rect.top > - Mapa.bloco_altura and Pa.rect.bottom < 704 + Mapa.bloco_altura:
+        Pa.image = pygame.transform.scale(Pa.image, (bloco_largura, bloco_altura))
+        if Pa.rect.left > -bloco_largura and Pa.rect.right < 1216 + bloco_largura and Pa.rect.top > - bloco_altura and Pa.rect.bottom < 704 + bloco_altura:
             Grupo_sprites_Pa.draw(screen)
 
     # Chave
     for i in range(len(Mapa.Chaves)):
         Ch.rect = Mapa.Chaves[i]
-        if Ch.rect.left > -Mapa.bloco_largura and Ch.rect.right < 1216 + Mapa.bloco_largura and Ch.rect.top > - Mapa.bloco_altura and Ch.rect.bottom < 704 + Mapa.bloco_altura:
+        if Ch.rect.left > -bloco_largura and Ch.rect.right < 1216 + bloco_largura and Ch.rect.top > - bloco_altura and Ch.rect.bottom < 704 + bloco_altura:
             Grupo_sprites_Ch.draw(screen)
 
     # Baú
     for i in range(len(Mapa.Baus)):
         Bau.rect = Mapa.Baus[i]
-        if Bau.rect.left > -Mapa.bloco_largura and Bau.rect.right < 1216 + Mapa.bloco_largura and Bau.rect.top > - Mapa.bloco_altura and Bau.rect.bottom < 704 + Mapa.bloco_altura:
+        if Bau.rect.left > -bloco_largura and Bau.rect.right < 1216 + bloco_largura and Bau.rect.top > - bloco_altura and Bau.rect.bottom < 704 + bloco_altura:
             Grupo_sprites_Bau.draw(screen)
 
     # Coração
     for i in range(len(Mapa.coracao)):
         Co.rect = Mapa.coracao[i]
-        if Co.rect.left > -Mapa.bloco_largura and Co.rect.right < 1216 + Mapa.bloco_largura and Co.rect.top > - Mapa.bloco_altura and Co.rect.bottom < 704 + Mapa.bloco_altura:
+        if Co.rect.left > -bloco_largura and Co.rect.right < 1216 + bloco_largura and Co.rect.top > - bloco_altura and Co.rect.bottom < 704 + bloco_altura:
             Grupo_sprites_Co.draw(screen)
 
     # Porta
     for i in range(len(Mapa.Portas)):
         Por.rect = Mapa.Portas[i]
-        if Por.rect.left > -Mapa.bloco_largura and Por.rect.right < 1216 + Mapa.bloco_largura and Por.rect.top > - Mapa.bloco_altura and Por.rect.bottom < 704 + Mapa.bloco_altura:
+        if Por.rect.left > -bloco_largura and Por.rect.right < 1216 + bloco_largura and Por.rect.top > - bloco_altura and Por.rect.bottom < 704 + bloco_altura:
             Grupo_sprites_Por.draw(screen)
 
     # Espinho
@@ -209,78 +214,78 @@ def Desenha_sprites(screen):
             Es.image = spikes_Ativo.subsurface((0, 0), (64, 64))
         elif Mapa.Espinhos_estado[i] == "desativado":
             Es.image = spikes_Desativado.subsurface((64, 0), (64, 64))
-        Es.image = pygame.transform.scale(Es.image, (Mapa.bloco_largura, Mapa.bloco_altura))
-        if Es.rect.left > -Mapa.bloco_largura and Es.rect.right < 1216 + Mapa.bloco_largura and Es.rect.top > - Mapa.bloco_altura and Es.rect.bottom < 704 + Mapa.bloco_altura:
+        Es.image = pygame.transform.scale(Es.image, (bloco_largura, bloco_altura))
+        if Es.rect.left > -bloco_largura and Es.rect.right < 1216 + bloco_largura and Es.rect.top > - bloco_altura and Es.rect.bottom < 704 + bloco_altura:
             Grupo_sprites_Es.draw(screen)
 
     # Fim
     for i in range(len(Mapa.Fim)):
         Fim.rect = Mapa.Fim[i]
-        if Fim.rect.left > -Mapa.bloco_largura and Fim.rect.right < 1216 + Mapa.bloco_largura and Fim.rect.top > - Mapa.bloco_altura and Fim.rect.bottom < 704 + Mapa.bloco_altura:
+        if Fim.rect.left > -bloco_largura and Fim.rect.right < 1216 + bloco_largura and Fim.rect.top > - bloco_altura and Fim.rect.bottom < 704 + bloco_altura:
             Grupo_sprites_Fim.draw(screen)
 
     # Inimigo Vertical
     for i in range(len(Mapa.InimigosV)):
         # Abelha
         if Telas.fase[0] == -4:
-            Mapa.InimigosV[i] = pygame.Rect(Mapa.InimigosV[i].left, Mapa.InimigosV[i].top, Mapa.bloco_largura, 133)
+            Mapa.InimigosV[i] = pygame.Rect(Mapa.InimigosV[i].left, Mapa.InimigosV[i].top, bloco_largura, 133)
             IV.rect = Mapa.InimigosV[i]
             if Mapa.Inimigos_direcaoV[i] > 0:
                 IV.image = Abelha_Baixo.subsurface((sprites_ativos["Abelha"] * 60, 0), (60, 40))
             else:
                 IV.image = Abelha_Cima.subsurface((sprites_ativos["Abelha"] * 60, 0), (60, 40))
-            IV.image = pygame.transform.scale(IV.image, (Mapa.bloco_largura, 133))
+            IV.image = pygame.transform.scale(IV.image, (bloco_largura, 133))
         # Aranha
         elif Telas.fase[0] == -5:
-            Mapa.InimigosV[i] = pygame.Rect(Mapa.InimigosV[i].left, Mapa.InimigosV[i].top, Mapa.bloco_largura, Mapa.bloco_altura)
+            Mapa.InimigosV[i] = pygame.Rect(Mapa.InimigosV[i].left, Mapa.InimigosV[i].top, bloco_largura, bloco_altura)
             IV.rect = Mapa.InimigosV[i]
             if Mapa.Inimigos_direcaoV[i] > 0:
                 IV.image = Aranha_Baixo.subsurface((sprites_ativos["Aranha"] * 64, 0), (64, 64))
             else:
                 IV.image = Aranha_Cima.subsurface((sprites_ativos["Aranha"] * 64, 0), (64, 64))
-            IV.image = pygame.transform.scale(IV.image, (Mapa.bloco_largura, Mapa.bloco_altura))
+            IV.image = pygame.transform.scale(IV.image, (bloco_largura, bloco_altura))
         # Morcego
         if Telas.fase[0] == -6:
-            Mapa.InimigosV[i] = pygame.Rect(Mapa.InimigosV[i].left, Mapa.InimigosV[i].top, Mapa.bloco_largura, 100)
+            Mapa.InimigosV[i] = pygame.Rect(Mapa.InimigosV[i].left, Mapa.InimigosV[i].top, bloco_largura, 100)
             IV.rect = Mapa.InimigosV[i]
             if Mapa.Inimigos_direcaoV[i] > 0:
                 IV.image = Morcego_Baixo.subsurface((sprites_ativos["Morcego"] * 64, 0), (64, 32))
             else:
                 IV.image = Morcego_Cima.subsurface((sprites_ativos["Morcego"] * 64, 0), (64, 32))
-            IV.image = pygame.transform.scale(IV.image, (Mapa.bloco_largura, 100))
-        if IV.rect.left > -Mapa.bloco_largura and IV.rect.right < 1216 + Mapa.bloco_largura and IV.rect.top > - Mapa.bloco_altura and IV.rect.bottom < 704 + Mapa.bloco_altura:
+            IV.image = pygame.transform.scale(IV.image, (bloco_largura, 100))
+        if IV.rect.left > -bloco_largura and IV.rect.right < 1216 + bloco_largura and IV.rect.top > - bloco_altura and IV.rect.bottom < 704 + bloco_altura:
             Grupo_sprites_IV.draw(screen)
 
     # Inimigo Horizontal
     for i in range(len(Mapa.InimigosH)):
         # Abelha
         if Telas.fase[0] == -4:
-            Mapa.InimigosH[i] = pygame.Rect(Mapa.InimigosH[i].left, Mapa.InimigosH[i].top, 133, Mapa.bloco_altura)
+            Mapa.InimigosH[i] = pygame.Rect(Mapa.InimigosH[i].left, Mapa.InimigosH[i].top, 133, bloco_altura)
             IH.rect = Mapa.InimigosH[i]
             if Mapa.Inimigos_direcaoH[i] > 0:
                 IH.image = Abelha_Direita.subsurface((sprites_ativos["Abelha"] * 40, 0), (40, 60))
             else:
                 IH.image = Abelha_Esquerda.subsurface((sprites_ativos["Abelha"] * 40, 0), (40, 60))
-            IH.image = pygame.transform.scale(IH.image, (133, Mapa.bloco_altura))
+            IH.image = pygame.transform.scale(IH.image, (133, bloco_altura))
         # Aranha
         elif Telas.fase[0] == -5:
-            Mapa.InimigosH[i] = pygame.Rect(Mapa.InimigosH[i].left, Mapa.InimigosH[i].top, Mapa.bloco_largura, Mapa.bloco_altura)
+            Mapa.InimigosH[i] = pygame.Rect(Mapa.InimigosH[i].left, Mapa.InimigosH[i].top, bloco_largura, bloco_altura)
             IH.rect = Mapa.InimigosH[i]
             if Mapa.Inimigos_direcaoH[i] > 0:
                 IH.image = Aranha_Direita.subsurface((sprites_ativos["Aranha"] * 64, 0), (64, 64))
             else:
                 IH.image = Aranha_Esquerda.subsurface((sprites_ativos["Aranha"] * 64, 0), (64, 64))
-            IH.image = pygame.transform.scale(IH.image, (Mapa.bloco_largura, Mapa.bloco_altura))
+            IH.image = pygame.transform.scale(IH.image, (bloco_largura, bloco_altura))
         # Morcego
         if Telas.fase[0] == -6:
-            Mapa.InimigosH[i] = pygame.Rect(Mapa.InimigosH[i].left, Mapa.InimigosH[i].top, 100, Mapa.bloco_altura)
+            Mapa.InimigosH[i] = pygame.Rect(Mapa.InimigosH[i].left, Mapa.InimigosH[i].top, 100, bloco_altura)
             IH.rect = Mapa.InimigosH[i]
             if Mapa.Inimigos_direcaoH[i] > 0:
                 IH.image = Morcego_Direita.subsurface((sprites_ativos["Morcego"] * 32, 0), (32, 64))
             else:
                 IH.image = Morcego_Esquerda.subsurface((sprites_ativos["Morcego"] * 32, 0), (32, 64))
-            IH.image = pygame.transform.scale(IH.image, (100, Mapa.bloco_altura))
-        if IH.rect.left > -Mapa.bloco_largura and IH.rect.right < 1216 + Mapa.bloco_largura and IH.rect.top > - Mapa.bloco_altura and IH.rect.bottom < 704 + Mapa.bloco_altura:
+            IH.image = pygame.transform.scale(IH.image, (100, bloco_altura))
+        if IH.rect.left > -bloco_largura and IH.rect.right < 1216 + bloco_largura and IH.rect.top > - bloco_altura and IH.rect.bottom < 704 + bloco_altura:
             Grupo_sprites_IH.draw(screen)
 def Player_sprite(retJogador, screen):
     # Edgar
