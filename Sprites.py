@@ -300,10 +300,10 @@ def Status(screen):
     # Vida
     C = Coracao.subsurface((0, 0), (59, 64))
     C = pygame.transform.scale(C, (37, 40))
-    screen.blit(C, (3, 0))
+    screen.blit(C, (3, -2))
     Telas.escrever_texto(f"X {len(Mapa.Vidas)}", Telas.font, (255, 255, 255), screen, 45, 7)
     # Chave
     Ch = Chave
-    screen.blit(Ch, (100, 12))
+    screen.blit(Ch, (100, 9))
     Telas.escrever_texto(f"X {len(Mapa.Chave_pega)}", Telas.font, (255, 255, 255), screen, 157, 7)
 
