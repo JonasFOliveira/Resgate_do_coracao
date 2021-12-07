@@ -306,4 +306,3 @@ def Status(screen):
     Ch = Chave
     screen.blit(Ch, (100, 9))
     Telas.escrever_texto(f"X {len(Mapa.Chave_pega)}", Telas.font, (255, 255, 255), screen, 157, 7)
-
