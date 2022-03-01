@@ -25,4 +25,8 @@ Para clonar o repositório, copie e cole a linha abaixo no seu programa padrão 
 
 <p> Venha! Descubra o amor e Resgate seu coração! </p>
 
+## Participaram desse Projeto:
+<a href="https://github.com/Caiufgs">Caio</a>  
+<br> <a href="https://github.com/JonasFOliveira">Jonas Felipe</a>
+<br> <a href="https://github.com/YhasmimTigre">Yhasmim Tigre </a>
 
