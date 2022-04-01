@@ -19,7 +19,7 @@ Para clonar o repositório, copie e cole a linha abaixo no seu programa padrão 
 ### 💡 O que tem em nosso jogo?
 
 * Tutorial;
-* Musica On/Off;
+* Música On/Off;
 * Cutscenes interativas;
 * Personagens cativantes.
 
@@ -27,4 +27,3 @@ Para clonar o repositório, copie e cole a linha abaixo no seu programa padrão 
 
 ## Participaram desse Projeto:
 <a href="https://github.com/Caiufgs">Caio</a> <br> <a href="https://github.com/JonasFOliveira">Jonas Felipe</a> <br> <a href="https://github.com/YhasmimTigre">Yhasmim Tigre </a>
-
